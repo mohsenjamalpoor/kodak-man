@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaArrowRight, FaClock, FaGraduationCap } from "react-icons/fa6";
@@ -15,7 +16,27 @@ export async function generateMetadata({ params }) {
   return { title: d ? d.name : "پزشک" };
 }
 
-export default async function DoctorPage({ params }) {
+function Skeleton() {
+  return (
+    <div>
+      <div className="h-32 bg-gradient-to-br from-teal-600 to-sky-600" />
+      <div className="mx-auto -mt-12 max-w-3xl space-y-4 px-4">
+        <div className="h-64 animate-pulse rounded-3xl bg-white ring-1 ring-slate-200" />
+        <div className="h-40 animate-pulse rounded-3xl bg-white ring-1 ring-slate-200" />
+      </div>
+    </div>
+  );
+}
+
+export default function DoctorPage({ params }) {
+  return (
+    <Suspense fallback={<Skeleton />}>
+      <DoctorContent params={params} />
+    </Suspense>
+  );
+}
+
+async function DoctorContent({ params }) {
   const { id } = await params;
   const d = getDoctor(id);
   if (!d) notFound();
@@ -79,9 +100,7 @@ export default async function DoctorPage({ params }) {
               return (
                 <div
                   key={day}
-                  className={`rounded-2xl p-3 text-center ${
-                    time ? "bg-teal-50 ring-1 ring-teal-100" : "bg-slate-50"
-                  }`}
+                  className={`rounded-2xl p-3 text-center ${time ? "bg-teal-50 ring-1 ring-teal-100" : "bg-slate-50"}`}
                 >
                   <p className="text-xs text-slate-500">{day}</p>
                   <p
