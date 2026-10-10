@@ -1,3 +1,4 @@
+import { BsLungs } from "react-icons/bs";
 import {
   FaBaby,
   FaHeartPulse,
@@ -16,14 +17,20 @@ export const services = [
     icon: FaTruckMedical,
   },
   {
-    title: "درمانگاه تخصصی و فوق تخصصی",
-    desc: "ویزیت با پزشکان متخصص و فوق تخصص کودکان به‌صورت نوبت‌دهی.",
-    icon: FaStethoscope,
+    title: "PICU",
+    desc: "مراقبت‌های ویژه  کودکان و بیمار با تجهیزات مدرن.",
+    icon: BsLungs,
   },
+
   {
     title: "بخش نوزادان و NICU",
     desc: "مراقبت‌های ویژه نوزادان نارس و بیمار با تجهیزات مدرن.",
     icon: FaBaby,
+  },
+  {
+    title: "درمانگاه تخصصی و فوق تخصصی",
+    desc: "ویزیت با پزشکان متخصص و فوق تخصص کودکان به‌صورت نوبت‌دهی.",
+    icon: FaStethoscope,
   },
   {
     title: "قلب کودکان و اکوکاردیوگرافی",
