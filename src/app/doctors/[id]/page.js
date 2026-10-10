@@ -21,39 +21,78 @@ export default async function DoctorPage({ params }) {
   if (!d) notFound();
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
-      <Link href="/doctors" className="mb-6 inline-flex items-center gap-2 text-sm text-teal-700 hover:underline">
-        <FaArrowRight /> بازگشت به پزشکان
-      </Link>
-
-      <div className="mb-6 flex flex-col items-center gap-6 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:flex-row md:p-8">
-        <DoctorAvatar doctor={d} className="h-32 w-32 text-5xl" />
-        <div className="text-center sm:text-right">
-          <h1 className="text-2xl font-extrabold text-slate-900">{d.name}</h1>
-          <p className="mt-1 text-teal-700">{d.specialty}</p>
-          <p className="mt-2 text-sm text-slate-500">سابقه فعالیت: {faNum(d.experience)} سال</p>
-          <p className="mt-4 text-sm leading-8 text-slate-600">{d.bio}</p>
+    <div>
+      <div className="bg-gradient-to-br from-teal-600 to-sky-600 px-4 pb-16 pt-5 text-white">
+        <div className="mx-auto max-w-3xl">
+          <Link
+            href="/doctors"
+            className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-medium transition active:scale-95"
+          >
+            <FaArrowRight /> پزشکان
+          </Link>
         </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-          <h2 className="mb-4 flex items-center gap-2 font-bold text-slate-800"><FaGraduationCap className="text-teal-600" /> تحصیلات و سوابق</h2>
-          <ul className="space-y-2 text-sm text-slate-600">
-            {d.education.map((e) => <li key={e} className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-teal-500" />{e}</li>)}
-          </ul>
-        </section>
+      <div className="mx-auto -mt-12 max-w-3xl space-y-4 px-4 pb-8">
+        <div className="flex flex-col items-center gap-2 rounded-3xl bg-white p-6 text-center shadow-lg shadow-slate-200 ring-1 ring-slate-200">
+          <DoctorAvatar
+            doctor={d}
+            className="-mt-16 h-28 w-28 text-5xl ring-4 ring-white"
+          />
+          <h1 className="mt-2 text-xl font-extrabold text-slate-900">
+            {d.name}
+          </h1>
+          <p className="text-sm font-medium text-teal-700">{d.specialty}</p>
+          <span className="rounded-full bg-slate-100 px-4 py-1 text-xs font-medium text-slate-600">
+            {faNum(d.experience)} سال سابقه
+          </span>
+          <p className="mt-2 text-sm leading-8 text-slate-600">{d.bio}</p>
+        </div>
 
-        <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-          <h2 className="mb-4 flex items-center gap-2 font-bold text-slate-800"><FaClock className="text-teal-600" /> ساعت حضور در درمانگاه</h2>
-          <ul className="divide-y divide-slate-100 text-sm">
-            {days.map((day) => (
-              <li key={day} className="flex justify-between py-2">
-                <span className="text-slate-600">{day}</span>
-                <span className={d.schedule[day] ? "font-medium text-teal-700" : "text-slate-300"}>{d.schedule[day] || "—"}</span>
+        <section className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+          <h2 className="mb-4 flex items-center gap-2 font-bold text-slate-800">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-violet-50 text-violet-600">
+              <FaGraduationCap />
+            </span>
+            تحصیلات و سوابق
+          </h2>
+          <ul className="space-y-2.5 text-sm text-slate-600">
+            {d.education.map((e) => (
+              <li key={e} className="flex items-center gap-3">
+                <span className="h-2 w-2 shrink-0 rounded-full bg-violet-400" />
+                {e}
               </li>
             ))}
           </ul>
+        </section>
+
+        <section className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+          <h2 className="mb-4 flex items-center gap-2 font-bold text-slate-800">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-teal-50 text-teal-600">
+              <FaClock />
+            </span>
+            ساعت حضور در درمانگاه
+          </h2>
+          <div className="grid grid-cols-2 gap-3">
+            {days.map((day) => {
+              const time = d.schedule[day];
+              return (
+                <div
+                  key={day}
+                  className={`rounded-2xl p-3 text-center ${
+                    time ? "bg-teal-50 ring-1 ring-teal-100" : "bg-slate-50"
+                  }`}
+                >
+                  <p className="text-xs text-slate-500">{day}</p>
+                  <p
+                    className={`mt-1 text-sm font-bold ${time ? "text-teal-700" : "text-slate-300"}`}
+                  >
+                    {time || "—"}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </section>
       </div>
     </div>
