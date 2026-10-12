@@ -8,8 +8,10 @@ export const bookingLinks = {
   "تخصص کودکان": "",
   "فوق تخصص آسم و آلرژی": "",
   "فوق تخصص مغز و اعصاب کودکان": "",
-  "فوق تخصص گوارش کودکان": "",
-  "فوق تخصص عفونی کودکان": "",
+  "فوق تخصص گوارش کودکان":
+    "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|226",
+  "فوق تخصص عفونی کودکان":
+    "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|220",
   "فوق تخصص ریه کودکان":
     "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|218",
   "فوق تخصص غدد کودکان": "",
