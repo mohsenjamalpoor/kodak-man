@@ -5,7 +5,7 @@ import {
   FaCalendarDays,
   FaCalendarCheck,
   FaClock,
-  FaPhone,
+  FaArrowUpRightFromSquare,
   FaChevronLeft,
 } from "react-icons/fa6";
 import PageHeader from "@/components/PageHeader";
@@ -14,8 +14,8 @@ import DoctorAvatar from "@/components/DoctorAvatar";
 import { doctors, days } from "@/data/doctors";
 import { normalize, faNum } from "@/lib/utils";
 
-const PHONE = "02112345678";
-const PHONE_LABEL = "۰۲۱-۱۲۳۴۵۶۷۸";
+// لینک سامانه نوبت‌دهی را اینجا بگذارید
+const BOOKING_URL = "https://example.com";
 
 const todayMap = {
   6: "شنبه",
@@ -111,7 +111,7 @@ export default function SchedulePage() {
 
       <div className="mx-auto max-w-3xl px-4 pb-8">
         {/* کارت امروز */}
-        <div className="-mt-0 mb-2 mt-5 flex items-center gap-4 rounded-3xl bg-gradient-to-br from-teal-500 to-emerald-600 p-5 text-white shadow-lg shadow-teal-200">
+        <div className="mt-5 flex items-center gap-4 rounded-3xl bg-gradient-to-br from-teal-500 to-emerald-600 p-5 text-white shadow-lg shadow-teal-200">
           <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/20 text-2xl">
             <FaCalendarCheck />
           </span>
@@ -133,15 +133,15 @@ export default function SchedulePage() {
           )}
         </div>
 
-        {/* جستجو و فیلتر (چسبان) */}
-        <div className="sticky top-16 z-30 -mx-4 space-y-3 bg-slate-50/95 px-4 py-3 backdrop-blur">
+        {/* جستجو و فیلتر (غیرچسبان) */}
+        <div className="space-y-3 py-4">
           <SearchBox
             value={q}
             onChange={setQ}
             placeholder="جستجوی نام پزشک یا تخصص..."
           />
 
-          <div className="grid grid-cols-5 gap-2">
+          <div className="grid grid-cols-5 gap-2 pt-2">
             {days.map((d) => {
               const active = day === d;
               return (
@@ -194,7 +194,7 @@ export default function SchedulePage() {
         </div>
 
         {/* لیست پزشکان */}
-        <div className="mt-2 space-y-3">
+        <div className="space-y-3">
           {rows.map(({ doc, time }) => {
             const st = day === today ? statusUI[getStatus(time, now)] : null;
             return (
@@ -234,7 +234,7 @@ export default function SchedulePage() {
         </div>
 
         {rows.length === 0 && (
-          <div className="mt-6 rounded-3xl bg-white p-8 text-center ring-1 ring-slate-200">
+          <div className="rounded-3xl bg-white p-8 text-center ring-1 ring-slate-200">
             <p className="text-sm text-slate-500">
               در {day} پزشکی با این مشخصات حضور ندارد.
             </p>
@@ -250,21 +250,23 @@ export default function SchedulePage() {
           </div>
         )}
 
-        {/* دریافت نوبت */}
+        {/* ورود به سامانه نوبت‌دهی */}
         <a
-          href={`tel:${PHONE}`}
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-6 flex items-center gap-4 rounded-3xl bg-slate-900 p-4 text-white transition active:scale-[0.98]"
         >
           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-500 text-xl">
-            <FaPhone />
+            <FaCalendarCheck />
           </span>
           <div className="flex-1">
-            <p className="text-sm font-bold">دریافت یا تغییر نوبت</p>
-            <p className="mt-0.5 text-xs text-slate-300" dir="ltr">
-              {PHONE_LABEL}
+            <p className="text-sm font-bold">دریافت نوبت</p>
+            <p className="mt-0.5 text-xs text-slate-300">
+              ورود به سامانه نوبت‌دهی
             </p>
           </div>
-          <FaChevronLeft className="text-slate-500" />
+          <FaArrowUpRightFromSquare className="text-slate-500" />
         </a>
 
         <p className="mt-4 text-center text-[11px] leading-6 text-slate-400">
