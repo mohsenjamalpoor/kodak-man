@@ -7,7 +7,8 @@ export const DEFAULT_BOOKING_URL = "";
 export const bookingLinks = {
   "تخصص کودکان": "",
   "فوق تخصص آسم و آلرژی": "",
-  "فوق تخصص مغز و اعصاب کودکان": "",
+  "فوق تخصص مغز و اعصاب کودکان":
+    "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|228",
   "فوق تخصص گوارش کودکان":
     "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|226",
   "فوق تخصص عفونی کودکان":
@@ -18,7 +19,8 @@ export const bookingLinks = {
     "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|223",
   "فوق تخصص قلب کودکان":
     "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|224",
-  "فوق تخصص کلیه کودکان": "",
+  "فوق تخصص کلیه کودکان":
+    "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|225",
 };
 
 export const getBookingUrl = (specialty) =>
