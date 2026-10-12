@@ -50,9 +50,9 @@ export default function Home() {
             <h1 className="mb-4 text-3xl font-extrabold leading-snug">
               بیمارستان فیروزآبادی
             </h1>
-            <h1 className="mb-4 text-xl font-extrabold leading-snug ">
+            <p className="mt-1 text-sm font-medium text-teal-50 md:text-base">
               سلامت کودک شما، اولویت ماست.
-            </h1>
+            </p>
 
             <div className="hidden flex-wrap gap-3 md:flex">
               <Link
