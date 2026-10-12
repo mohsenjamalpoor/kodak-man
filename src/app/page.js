@@ -99,16 +99,6 @@ export default function Home() {
               </h2>
             </Link>
           ))}
-
-          <a
-            href="tel:115"
-            className="flex min-h-36 flex-col items-center justify-center gap-4 rounded-3xl bg-linear-to-br from-red-500 to-rose-600 p-4 text-center text-white shadow-sm transition active:scale-95 md:min-h-44"
-          >
-            <span className="grid h-16 w-16 place-items-center rounded-2xl bg-white/20 text-3xl">
-              <FaPhone />
-            </span>
-            <span className="text-sm font-bold md:text-base">اورژانس ۱۱۵</span>
-          </a>
         </div>
       </section>
     </>

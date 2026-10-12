@@ -23,10 +23,6 @@ export default function Footer() {
             <FaClock className="text-teal-400" /> درمانگاه: شنبه تا چهارشنبه
           </li>
         </ul>
-        <p className="rounded-xl bg-slate-800 p-4 text-xs leading-6">
-          محتوای این سایت جنبه آموزشی دارد و جایگزین ویزیت پزشک نیست. در شرایط
-          اورژانسی با ۱۱۵ تماس بگیرید.
-        </p>
       </div>
       <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
         © کودک من - تمامی حقوق محفوظ است
