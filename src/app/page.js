@@ -52,7 +52,7 @@ export default function Home() {
               <br />
               اولویت ماست
             </h1>
-            <p className="mb-8 hidden max-w-md text-sm leading-8 text-teal-50 md:block md:text-base">
+            <p className="mb-8  max-w-md text-sm leading-8 text-teal-50 md:block md:text-base">
               مرکز تخصصی و فوق تخصصی کودکان و نوزادان با پزشکان مجرب و تجهیزات
               روز. برنامه ویزیت را ببینید و به‌راحتی نوبت خود را برنامه‌ریزی
               کنید.
