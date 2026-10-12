@@ -15,7 +15,7 @@ import { doctors, days } from "@/data/doctors";
 import { normalize, faNum } from "@/lib/utils";
 
 // لینک سامانه نوبت‌دهی را اینجا بگذارید
-const BOOKING_URL = "https://example.com";
+const BOOKING_URL = "https://firoozabadinobat.iums.ac.ir/tc";
 
 const todayMap = {
   6: "شنبه",
