@@ -8,8 +8,8 @@ export const metadata = { title: "تازه‌های پزشکی کودکان" };
 export default function Page() {
   return (
     <>
-      <PageHeader icon={FaNewspaper} title="تازه‌های پزشکی کودکان" subtitle="آخرین دستاوردها و راهنمایی‌های روز" />
-      <div className="mx-auto max-w-6xl px-4 py-8">
+      <PageHeader icon={FaNewspaper} title="تازه‌های پزشکی کودکان" />
+      <div className="mx-auto max-w-3xl px-4 py-6">
         <ArticleList items={news} basePath="/news" />
       </div>
     </>
