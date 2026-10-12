@@ -64,9 +64,7 @@ async function DoctorContent({ params }) {
             {d.name}
           </h1>
           <p className="text-sm font-medium text-teal-700">{d.specialty}</p>
-          <span className="rounded-full bg-slate-100 px-4 py-1 text-xs font-medium text-slate-600">
-            {faNum(d.experience)} سال سابقه
-          </span>
+
           <p className="mt-2 text-sm leading-8 text-slate-600">{d.bio}</p>
         </div>
 

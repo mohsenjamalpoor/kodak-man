@@ -8,13 +8,17 @@ import { navLinks } from "@/lib/utils";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const isActive = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const isActive = (href) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 text-xl font-extrabold text-teal-700">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-teal-500 to-sky-500 text-white">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-xl font-extrabold text-teal-700"
+        >
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-linear-to-br from-teal-500 to-sky-500 text-white">
             <FaBaby />
           </span>
           کودک من
@@ -26,7 +30,9 @@ export default function Header() {
               key={l.href}
               href={l.href}
               className={`rounded-lg px-3 py-2 text-sm font-medium transition ${
-                isActive(l.href) ? "bg-teal-50 text-teal-700" : "text-slate-600 hover:bg-slate-100"
+                isActive(l.href)
+                  ? "bg-teal-50 text-teal-700"
+                  : "text-slate-600 hover:bg-slate-100"
               }`}
             >
               {l.label}
