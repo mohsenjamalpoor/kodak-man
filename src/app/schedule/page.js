@@ -1,100 +1,275 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { FaCalendarDays, FaClock } from "react-icons/fa6";
+import {
+  FaCalendarDays,
+  FaCalendarCheck,
+  FaClock,
+  FaPhone,
+  FaChevronLeft,
+} from "react-icons/fa6";
 import PageHeader from "@/components/PageHeader";
 import SearchBox from "@/components/SearchBox";
 import DoctorAvatar from "@/components/DoctorAvatar";
 import { doctors, days } from "@/data/doctors";
-import { normalize } from "@/lib/utils";
+import { normalize, faNum } from "@/lib/utils";
 
+const PHONE = "02112345678";
+const PHONE_LABEL = "۰۲۱-۱۲۳۴۵۶۷۸";
+
+const todayMap = {
+  6: "شنبه",
+  0: "یکشنبه",
+  1: "دوشنبه",
+  2: "سه‌شنبه",
+  3: "چهارشنبه",
+};
 const specialties = [...new Set(doctors.map((d) => d.specialty))];
-const todayMap = { 6: "شنبه", 0: "یکشنبه", 1: "دوشنبه", 2: "سه‌شنبه", 3: "چهارشنبه" };
+const shortSpec = (s) => s.replace("فوق تخصص ", "");
+
+const toLatin = (s) => s.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+const toMin = (t) => {
+  const [h, m] = t.split(":").map(Number);
+  return h * 60 + (m || 0);
+};
+function parseRanges(str) {
+  return toLatin(str)
+    .split("و")
+    .map((p) => p.split("-").map((x) => x.trim()))
+    .filter((r) => r.length === 2 && r[0].includes(":") && r[1].includes(":"))
+    .map(([a, b]) => [toMin(a), toMin(b)]);
+}
+function getStatus(time, now) {
+  if (now == null) return null;
+  const r = parseRanges(time);
+  if (!r.length) return null;
+  if (r.some(([a, b]) => now >= a && now < b)) return "present";
+  if (now >= Math.max(...r.map((x) => x[1]))) return "ended";
+  return "soon";
+}
+
+const statusUI = {
+  present: {
+    label: "اکنون حاضر",
+    cls: "bg-emerald-100 text-emerald-700",
+    dot: "bg-emerald-500",
+  },
+  soon: {
+    label: "به‌زودی",
+    cls: "bg-amber-100 text-amber-700",
+    dot: "bg-amber-500",
+  },
+  ended: {
+    label: "پایان حضور",
+    cls: "bg-slate-100 text-slate-500",
+    dot: "bg-slate-400",
+  },
+};
 
 export default function SchedulePage() {
   const [q, setQ] = useState("");
-  const [day, setDay] = useState("همه");
   const [spec, setSpec] = useState("همه");
+  const [day, setDay] = useState("شنبه");
   const [today, setToday] = useState(null);
+  const [now, setNow] = useState(null);
 
   useEffect(() => {
-    setToday(todayMap[new Date().getDay()] || null);
+    const tick = () => {
+      const d = new Date();
+      setToday(todayMap[d.getDay()] || null);
+      setNow(d.getHours() * 60 + d.getMinutes());
+    };
+    tick();
+    const t = todayMap[new Date().getDay()];
+    if (t) setDay(t);
+    const id = setInterval(tick, 60000);
+    return () => clearInterval(id);
   }, []);
 
-  const sections = useMemo(() => {
+  const counts = useMemo(
+    () =>
+      Object.fromEntries(
+        days.map((d) => [d, doctors.filter((x) => x.schedule[d]).length]),
+      ),
+    [],
+  );
+
+  const rows = useMemo(() => {
     const n = normalize(q);
-    const shown = day === "همه" ? days : [day];
-    return shown
-      .map((d) => ({
-        day: d,
-        rows: doctors
-          .filter((doc) => doc.schedule[d])
-          .filter((doc) => spec === "همه" || doc.specialty === spec)
-          .filter((doc) => !n || normalize(doc.name + " " + doc.specialty).includes(n))
-          .map((doc) => ({ doc, time: doc.schedule[d] })),
-      }))
-      .filter((s) => s.rows.length);
-  }, [q, day, spec]);
+    return doctors
+      .filter((d) => d.schedule[day])
+      .filter((d) => spec === "همه" || d.specialty === spec)
+      .filter((d) => !n || normalize(d.name + " " + d.specialty).includes(n))
+      .map((d) => ({ doc: d, time: d.schedule[day] }));
+  }, [q, spec, day]);
+
+  const todayCount = today ? counts[today] : 0;
 
   return (
     <>
-      <PageHeader icon={FaCalendarDays} title="برنامه هفتگی درمانگاه" subtitle="ساعت حضور پزشکان از شنبه تا چهارشنبه" />
-      <div className="mx-auto max-w-6xl space-y-6 px-4 py-8">
-        <div className="grid gap-3 md:grid-cols-[1fr_260px]">
-          <SearchBox value={q} onChange={setQ} placeholder="جستجوی نام پزشک یا تخصص..." />
-          <select
-            value={spec}
-            onChange={(e) => setSpec(e.target.value)}
-            className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-100"
-          >
-            <option value="همه">همه تخصص‌ها</option>
-            {specialties.map((s) => <option key={s} value={s}>{s}</option>)}
-          </select>
-        </div>
+      <PageHeader icon={FaCalendarDays} title="برنامه هفتگی درمانگاه" />
 
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {["همه", ...days].map((d) => (
-            <button
-              key={d}
-              onClick={() => setDay(d)}
-              className={`shrink-0 rounded-xl px-5 py-2 text-sm font-medium transition ${
-                day === d ? "bg-teal-600 text-white shadow" : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
-              }`}
-            >
-              {d}
-              {d === today && <span className="mr-1 text-[10px] opacity-80">(امروز)</span>}
-            </button>
-          ))}
-        </div>
-
-        {sections.map((s) => (
-          <section key={s.day}>
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              {s.day}
-              {s.day === today && <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700">امروز</span>}
-            </h2>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {s.rows.map(({ doc, time }) => (
-                <Link
-                  key={doc.id}
-                  href={`/doctors/${doc.id}`}
-                  className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200 transition hover:shadow-md"
-                >
-                  <DoctorAvatar doctor={doc} />
-                  <div className="min-w-0">
-                    <h3 className="truncate font-bold text-slate-800">{doc.name}</h3>
-                    <p className="truncate text-xs text-slate-500">{doc.specialty}</p>
-                    <p className="mt-2 flex items-center gap-1 text-sm font-medium text-teal-700">
-                      <FaClock className="text-xs" /> {time}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+      <div className="mx-auto max-w-3xl px-4 pb-8">
+        {/* کارت امروز */}
+        <div className="-mt-0 mb-2 mt-5 flex items-center gap-4 rounded-3xl bg-gradient-to-br from-teal-500 to-emerald-600 p-5 text-white shadow-lg shadow-teal-200">
+          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/20 text-2xl">
+            <FaCalendarCheck />
+          </span>
+          {today ? (
+            <div>
+              <p className="text-xs text-teal-50">امروز</p>
+              <p className="text-lg font-extrabold">{today}</p>
+              <p className="mt-0.5 text-sm text-teal-50">
+                {faNum(todayCount)} پزشک در درمانگاه حضور دارند
+              </p>
             </div>
-          </section>
-        ))}
+          ) : (
+            <div>
+              <p className="text-lg font-extrabold">درمانگاه امروز تعطیل است</p>
+              <p className="mt-0.5 text-sm text-teal-50">
+                درمانگاه شنبه تا چهارشنبه فعال است
+              </p>
+            </div>
+          )}
+        </div>
 
-        {sections.length === 0 && <p className="py-12 text-center text-slate-500">پزشکی با این مشخصات پیدا نشد.</p>}
+        {/* جستجو و فیلتر (چسبان) */}
+        <div className="sticky top-16 z-30 -mx-4 space-y-3 bg-slate-50/95 px-4 py-3 backdrop-blur">
+          <SearchBox
+            value={q}
+            onChange={setQ}
+            placeholder="جستجوی نام پزشک یا تخصص..."
+          />
+
+          <div className="grid grid-cols-5 gap-2">
+            {days.map((d) => {
+              const active = day === d;
+              return (
+                <button
+                  key={d}
+                  onClick={() => setDay(d)}
+                  className={`relative flex flex-col items-center rounded-2xl px-1 py-2.5 transition active:scale-95 ${
+                    active
+                      ? "bg-teal-600 text-white shadow-md shadow-teal-200"
+                      : "bg-white text-slate-600 ring-1 ring-slate-200"
+                  }`}
+                >
+                  <span className="text-[13px] font-bold">{d}</span>
+                  <span
+                    className={`mt-0.5 text-[10px] ${active ? "text-teal-50" : "text-slate-400"}`}
+                  >
+                    {faNum(counts[d])} پزشک
+                  </span>
+                  {d === today && (
+                    <span
+                      className={`absolute -top-1.5 right-1/2 translate-x-1/2 rounded-full px-1.5 text-[9px] font-bold ${
+                        active
+                          ? "bg-white text-teal-700"
+                          : "bg-emerald-500 text-white"
+                      }`}
+                    >
+                      امروز
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none]">
+            {["همه", ...specialties].map((s) => (
+              <button
+                key={s}
+                onClick={() => setSpec(s)}
+                className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-medium transition active:scale-95 ${
+                  spec === s
+                    ? "bg-slate-800 text-white"
+                    : "bg-white text-slate-600 ring-1 ring-slate-200"
+                }`}
+              >
+                {s === "همه" ? "همه تخصص‌ها" : shortSpec(s)}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* لیست پزشکان */}
+        <div className="mt-2 space-y-3">
+          {rows.map(({ doc, time }) => {
+            const st = day === today ? statusUI[getStatus(time, now)] : null;
+            return (
+              <Link
+                key={doc.id}
+                href={`/doctors/${doc.id}`}
+                className="group flex items-center gap-4 rounded-3xl bg-white p-4 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
+              >
+                <DoctorAvatar doctor={doc} className="h-16 w-16 text-2xl" />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-sm font-bold leading-6 text-slate-800">
+                      {doc.name}
+                    </h3>
+                    {st && (
+                      <span
+                        className={`flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold ${st.cls}`}
+                      >
+                        <span
+                          className={`h-1.5 w-1.5 rounded-full ${st.dot}`}
+                        />
+                        {st.label}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs leading-5 text-teal-700">
+                    {doc.specialty}
+                  </p>
+                  <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-700">
+                    <FaClock className="text-[10px]" /> {time}
+                  </p>
+                </div>
+                <FaChevronLeft className="shrink-0 text-slate-300 transition group-hover:-translate-x-1" />
+              </Link>
+            );
+          })}
+        </div>
+
+        {rows.length === 0 && (
+          <div className="mt-6 rounded-3xl bg-white p-8 text-center ring-1 ring-slate-200">
+            <p className="text-sm text-slate-500">
+              در {day} پزشکی با این مشخصات حضور ندارد.
+            </p>
+            <button
+              onClick={() => {
+                setQ("");
+                setSpec("همه");
+              }}
+              className="mt-4 rounded-full bg-teal-600 px-5 py-2 text-xs font-bold text-white active:scale-95"
+            >
+              پاک کردن فیلترها
+            </button>
+          </div>
+        )}
+
+        {/* دریافت نوبت */}
+        <a
+          href={`tel:${PHONE}`}
+          className="mt-6 flex items-center gap-4 rounded-3xl bg-slate-900 p-4 text-white transition active:scale-[0.98]"
+        >
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-500 text-xl">
+            <FaPhone />
+          </span>
+          <div className="flex-1">
+            <p className="text-sm font-bold">دریافت یا تغییر نوبت</p>
+            <p className="mt-0.5 text-xs text-slate-300" dir="ltr">
+              {PHONE_LABEL}
+            </p>
+          </div>
+          <FaChevronLeft className="text-slate-500" />
+        </a>
+
+        <p className="mt-4 text-center text-[11px] leading-6 text-slate-400">
+          برنامه ممکن است تغییر کند؛ پیش از مراجعه با درمانگاه تماس بگیرید.
+        </p>
       </div>
     </>
   );
