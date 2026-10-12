@@ -81,6 +81,7 @@ export default function SchedulePage() {
     };
     tick();
     const t = todayMap[new Date().getDay()];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (t) setDay(t);
     const id = setInterval(tick, 60000);
     return () => clearInterval(id);
