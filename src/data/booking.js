@@ -6,7 +6,8 @@ export const DEFAULT_BOOKING_URL = "";
 
 export const bookingLinks = {
   "تخصص کودکان": "",
-  "فوق تخصص آسم و آلرژی": "",
+  "فوق تخصص آسم و آلرژی":
+    "https://firoozabadinobat.iums.ac.ir/tc/profile/a4be38af-8d6b-11f1-aecc-005056afae8c",
   "فوق تخصص مغز و اعصاب کودکان":
     "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|228",
   "فوق تخصص گوارش کودکان":
