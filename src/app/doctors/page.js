@@ -44,9 +44,6 @@ export default function DoctorsPage() {
               <p className="min-h-10 text-xs leading-5 text-teal-700">
                 {d.specialty}
               </p>
-              <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium text-slate-600">
-                {faNum(d.experience)} سال سابقه
-              </span>
             </Link>
           ))}
         </div>
