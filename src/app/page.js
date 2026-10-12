@@ -50,7 +50,6 @@ export default function Home() {
             <h1 className="mb-4 text-3xl font-extrabold leading-snug md:text-5xl">
               سلامت کودک شما،
               <br />
-              اولویت ماست
             </h1>
             <p className="mb-8  max-w-md text-sm leading-8 text-teal-50 md:block md:text-base">
               مرکز تخصصی و فوق تخصصی کودکان و نوزادان با پزشکان مجرب و تجهیزات
