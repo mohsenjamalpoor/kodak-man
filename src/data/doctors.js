@@ -19,7 +19,7 @@ export const doctors = [
     id: 2,
     name: "دکتر مجید کروبی",
     specialty: " تخصص کودکان",
-    image: null,
+    image: "/images/drkarobi.jpg",
     bio: "مسئول بخش مراقبت‌های ویژه نوزادان با تمرکز بر نوزادان نارس و حمایت تنفسی.",
     education: ["دکترای پزشکی عمومی", "تخصص کودکان", "فلوشیپ نوزادان"],
     schedule: {
