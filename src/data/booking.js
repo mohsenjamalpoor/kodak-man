@@ -14,7 +14,8 @@ export const bookingLinks = {
     "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|220",
   "فوق تخصص ریه کودکان":
     "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|218",
-  "فوق تخصص غدد کودکان": "",
+  "فوق تخصص غدد کودکان":
+    "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|223",
   "فوق تخصص قلب کودکان":
     "https://firoozabadinobat.iums.ac.ir/tc/list?text=&select_degree_expertise=expertise|11|224",
   "فوق تخصص کلیه کودکان": "",
