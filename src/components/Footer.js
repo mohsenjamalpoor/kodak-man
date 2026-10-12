@@ -12,15 +12,21 @@ export default function Footer() {
           </p>
         </div>
         <ul className="space-y-3 text-sm">
-          <li className="flex items-center gap-2">
-            <FaLocationDot className="text-teal-400" /> تهران، شهر ری
+          <li className="flex items-start gap-2">
+            <FaLocationDot className="mt-1 shrink-0 text-teal-400" />
+            <span>
+              تهران، شهر ری، خیابان فدائیان اسلام، نرسیده به میدان شهر ری
+            </span>
           </li>
+
           <li className="flex items-center gap-2">
-            <FaPhone className="text-teal-400" />{" "}
+            <FaPhone className="shrink-0 text-teal-400" />
             <span dir="ltr">۰۲۱-۱۲۳۴۵۶۷۸</span>
           </li>
+
           <li className="flex items-center gap-2">
-            <FaClock className="text-teal-400" /> درمانگاه: شنبه تا چهارشنبه
+            <FaClock className="shrink-0 text-teal-400" />
+            <span>درمانگاه: شنبه تا چهارشنبه</span>
           </li>
         </ul>
       </div>
