@@ -6,7 +6,6 @@ import {
   FaNewspaper,
   FaHospital,
   FaBaby,
-  FaPhone,
 } from "react-icons/fa6";
 
 const features = [
