@@ -111,7 +111,7 @@ export default function SchedulePage() {
 
       <div className="mx-auto max-w-3xl px-4 pb-8">
         {/* کارت امروز */}
-        <div className="mt-5 flex items-center gap-4 rounded-3xl bg-gradient-to-br from-teal-500 to-emerald-600 p-5 text-white shadow-lg shadow-teal-200">
+        <div className="mt-5 flex items-center gap-4 rounded-3xl bg-linear-to-br from-teal-500 to-emerald-600 p-5 text-white shadow-lg shadow-teal-200">
           <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white/20 text-2xl">
             <FaCalendarCheck />
           </span>
