@@ -53,21 +53,6 @@ export default function Home() {
             <p className="mt-1 text-sm font-medium text-teal-50 md:text-base">
               سلامت کودک شما، اولویت ماست.
             </p>
-
-            <div className="hidden flex-wrap gap-3 md:flex">
-              <Link
-                href="/schedule"
-                className="rounded-2xl bg-white px-6 py-3 text-sm font-bold text-teal-700 shadow-lg transition hover:scale-105"
-              >
-                مشاهده برنامه درمانگاه
-              </Link>
-              <Link
-                href="/doctors"
-                className="rounded-2xl bg-white/15 px-6 py-3 text-sm font-bold ring-1 ring-white/40 transition hover:bg-white/25"
-              >
-                معرفی پزشکان
-              </Link>
-            </div>
           </div>
           <div className="hidden justify-center md:flex">
             <div className="grid h-64 w-64 place-items-center rounded-full bg-white/10 ring-8 ring-white/10">
