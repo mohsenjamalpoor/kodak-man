@@ -17,6 +17,19 @@ export const doctors = [
   },
   {
     id: 2,
+    name: "دکتر مجید کروبی",
+    specialty: " تخصص کودکان",
+    image: null,
+    bio: "مسئول بخش مراقبت‌های ویژه نوزادان با تمرکز بر نوزادان نارس و حمایت تنفسی.",
+    education: ["دکترای پزشکی عمومی", "تخصص کودکان", "فلوشیپ نوزادان"],
+    schedule: {
+      یکشنبه: "۰۸:۰۰ - ۱۲:۰۰",
+      دوشنبه: "۰۸:۰۰ - ۱۲:۰۰",
+      سه‌شنبه: "۰۸:۰۰ - ۱۲:۰۰",
+    },
+  },
+  {
+    id: 3,
     name: "دکتر فاطمه علیزاده",
     specialty: "فوق تخصص آسم و آلرژی",
     image: "/images/dralizade.jpg",
@@ -27,7 +40,7 @@ export const doctors = [
     },
   },
   {
-    id: 3,
+    id: 4,
     name: "دکتر سولماز عزیزآهاری",
     specialty: "فوق تخصص مغز و اعصاب کودکان",
     image: "/images/drahari.jpg",
@@ -40,7 +53,7 @@ export const doctors = [
     },
   },
   {
-    id: 4,
+    id: 5,
     name: "دکتر حسین موسوی",
     specialty: "فوق تخصص مغز و اعصاب کودکان",
     image: null,
@@ -49,7 +62,7 @@ export const doctors = [
     schedule: { شنبه: "۱۴:۰۰ - ۱۸:۰۰", چهارشنبه: "۱۴:۰۰ - ۱۸:۰۰" },
   },
   {
-    id: 5,
+    id: 6,
     name: "دکتر نرگس صادقی",
     specialty: "فوق تخصص گوارش کودکان",
     image: null,
@@ -58,7 +71,7 @@ export const doctors = [
     schedule: { دوشنبه: "۰۸:۰۰ - ۱۲:۰۰", چهارشنبه: "۱۶:۰۰ - ۱۹:۰۰" },
   },
   {
-    id: 6,
+    id: 7,
     name: "دکتر امیر حسینی",
     specialty: "فوق تخصص عفونی کودکان",
     image: null,
@@ -71,7 +84,7 @@ export const doctors = [
     },
   },
   {
-    id: 7,
+    id: 8,
     name: "دکتر لیلا نوری",
     specialty: "فوق تخصص ریه کودکان",
     image: null,
@@ -80,7 +93,7 @@ export const doctors = [
     schedule: { دوشنبه: "۱۴:۰۰ - ۱۸:۰۰", سه‌شنبه: "۰۸:۰۰ - ۱۲:۰۰" },
   },
   {
-    id: 8,
+    id: 9,
     name: "دکتر پژمان فرهادی",
     specialty: "فوق تخصص غدد کودکان",
     image: null,
@@ -89,7 +102,7 @@ export const doctors = [
     schedule: { یکشنبه: "۱۶:۰۰ - ۱۹:۰۰", چهارشنبه: "۰۸:۰۰ - ۱۱:۰۰" },
   },
   {
-    id: 9,
+    id: 10,
     name: "دکتر مهتاب سادات میرآفتاب",
     specialty: " تخصص کودکان",
     image: "/images/miraftab.jpg",
