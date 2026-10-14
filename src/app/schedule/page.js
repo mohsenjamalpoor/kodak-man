@@ -49,7 +49,7 @@ function getStatus(time, now) {
 
 const statusUI = {
   present: {
-    label: "حاضر",
+    label: "اکنون حاضر",
     cls: "bg-emerald-100 text-emerald-700",
     dot: "bg-emerald-500",
   },
@@ -59,7 +59,7 @@ const statusUI = {
     dot: "bg-amber-500",
   },
   ended: {
-    label: "پایان",
+    label: "پایان حضور",
     cls: "bg-slate-100 text-slate-500",
     dot: "bg-slate-400",
   },
@@ -99,23 +99,23 @@ export default function SchedulePage() {
     <>
       <PageHeader icon={FaCalendarDays} title="برنامه هفتگی درمانگاه" />
 
-      <div className="mx-auto max-w-3xl px-3 pb-6">
+      <div className="mx-auto max-w-3xl px-4 pb-8">
         {/* جستجو و فیلتر (غیرچسبان) */}
-        <div className="space-y-2 py-2.5">
+        <div className="space-y-3 py-3">
           <SearchBox
             value={q}
             onChange={setQ}
             placeholder="جستجوی نام پزشک یا تخصص..."
           />
 
-          <div className="grid grid-cols-5 gap-1.5 pt-1.5">
+          <div className="grid grid-cols-5 gap-2 pt-2">
             {days.map((d) => {
               const active = day === d;
               return (
                 <button
                   key={d}
                   onClick={() => setDay(d)}
-                  className={`relative rounded-xl px-1 py-2 text-xs font-bold transition active:scale-95 ${
+                  className={`relative rounded-2xl px-1 py-3 text-[13px] font-bold transition active:scale-95 ${
                     active
                       ? "bg-teal-600 text-white shadow-md shadow-teal-200"
                       : "bg-white text-slate-600 ring-1 ring-slate-200"
@@ -124,7 +124,7 @@ export default function SchedulePage() {
                   {d}
                   {d === today && (
                     <span
-                      className={`absolute -top-1.5 right-1/2 translate-x-1/2 rounded-full px-1.5 text-[8px] font-bold leading-3 ${
+                      className={`absolute -top-1.5 right-1/2 translate-x-1/2 rounded-full px-1.5 text-[9px] font-bold ${
                         active
                           ? "bg-white text-teal-700"
                           : "bg-emerald-500 text-white"
@@ -138,53 +138,53 @@ export default function SchedulePage() {
             })}
           </div>
 
-          <div className="-mx-3 flex gap-1.5 overflow-x-auto px-3 [scrollbar-width:none]">
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none]">
             {["همه", ...specialties].map((s) => (
               <button
                 key={s}
                 onClick={() => setSpec(s)}
-                className={`shrink-0 rounded-full px-3 py-1 text-[11px] font-medium transition active:scale-95 ${
+                className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-medium transition active:scale-95 ${
                   spec === s
                     ? "bg-slate-800 text-white"
                     : "bg-white text-slate-600 ring-1 ring-slate-200"
                 }`}
               >
-                {s === "همه" ? "همه" : shortSpec(s)}
+                {s === "همه" ? "همه تخصص‌ها" : shortSpec(s)}
               </button>
             ))}
           </div>
         </div>
 
         {/* لیست پزشکان: دو ستون در موبایل، سه ستون در دسکتاپ */}
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
+        <div className="grid grid-cols-2 gap-2.5 md:grid-cols-3 md:gap-4">
           {rows.map(({ doc, time }) => {
             const st = day === today ? statusUI[getStatus(time, now)] : null;
             return (
               <Link
                 key={doc.id}
                 href={`/doctors/${doc.id}`}
-                className="relative flex flex-col items-center gap-0.5 rounded-xl bg-white px-2 pb-2 pt-2.5 text-center shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-lg active:scale-95"
+                className="relative flex flex-col items-center gap-1 rounded-2xl bg-white p-3 pt-4 text-center shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-lg active:scale-95"
               >
                 {st && (
                   <span
-                    className={`absolute left-1.5 top-1.5 flex items-center gap-1 rounded-full px-1.5 py-px text-[8px] font-bold leading-3 ${st.cls}`}
+                    className={`absolute left-2 top-2 flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[9px] font-bold ${st.cls}`}
                   >
-                    <span className={`h-1 w-1 rounded-full ${st.dot}`} />
+                    <span className={`h-1.5 w-1.5 rounded-full ${st.dot}`} />
                     {st.label}
                   </span>
                 )}
                 <DoctorAvatar
                   doctor={doc}
-                  className="mt-1 h-12 w-12 text-lg md:h-14 md:w-14"
+                  className="mt-3 h-14 w-14 text-xl md:h-16 md:w-16"
                 />
-                <h3 className="line-clamp-2 min-h-8 text-[11px] font-bold leading-4 text-slate-800">
+                <h3 className="line-clamp-2 min-h-10 text-xs font-bold leading-5 text-slate-800">
                   {doc.name}
                 </h3>
-                <p className="line-clamp-1 text-[9px] leading-4 text-teal-700">
+                <p className="line-clamp-1 text-[10px] leading-4 text-teal-700">
                   {shortSpec(doc.specialty)}
                 </p>
-                <p className="mt-0.5 flex items-center gap-1 rounded-full bg-teal-50 px-2 py-0.5 text-[10px] font-bold leading-4 text-teal-700">
-                  <FaClock className="shrink-0 text-[8px]" /> {time}
+                <p className="mt-0.5 flex items-center gap-1 rounded-full bg-teal-50 px-2.5 py-1 text-[11px] font-bold leading-4 text-teal-700">
+                  <FaClock className="shrink-0 text-[9px]" /> {time}
                 </p>
               </Link>
             );
@@ -192,8 +192,8 @@ export default function SchedulePage() {
         </div>
 
         {rows.length === 0 && (
-          <div className="rounded-2xl bg-white p-6 text-center ring-1 ring-slate-200">
-            <p className="text-xs text-slate-500">
+          <div className="rounded-3xl bg-white p-8 text-center ring-1 ring-slate-200">
+            <p className="text-sm text-slate-500">
               در {day} پزشکی با این مشخصات حضور ندارد.
             </p>
             <button
@@ -201,7 +201,7 @@ export default function SchedulePage() {
                 setQ("");
                 setSpec("همه");
               }}
-              className="mt-3 rounded-full bg-teal-600 px-4 py-1.5 text-[11px] font-bold text-white active:scale-95"
+              className="mt-4 rounded-full bg-teal-600 px-5 py-2 text-xs font-bold text-white active:scale-95"
             >
               پاک کردن فیلترها
             </button>
@@ -213,22 +213,22 @@ export default function SchedulePage() {
           href={BOOKING_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 flex items-center gap-3 rounded-2xl bg-slate-900 p-3 text-white transition active:scale-[0.98]"
+          className="mt-5 flex items-center gap-4 rounded-3xl bg-slate-900 p-4 text-white transition active:scale-[0.98]"
         >
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-500 text-lg">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-500 text-xl">
             <FaCalendarCheck />
           </span>
           <div className="flex-1">
-            <p className="text-xs font-bold">دریافت نوبت</p>
-            <p className="text-[10px] text-slate-300">
+            <p className="text-sm font-bold">دریافت نوبت</p>
+            <p className="mt-0.5 text-xs text-slate-300">
               ورود به سامانه نوبت‌دهی
             </p>
           </div>
-          <FaArrowUpRightFromSquare className="text-sm text-slate-500" />
+          <FaArrowUpRightFromSquare className="text-slate-500" />
         </a>
 
-        <p className="mt-2 text-center text-[10px] leading-5 text-slate-400">
-          برنامه ممکن است تغییر کند؛ پیش از مراجعه تماس بگیرید.
+        <p className="mt-3 text-center text-[11px] leading-6 text-slate-400">
+          برنامه ممکن است تغییر کند؛ پیش از مراجعه با درمانگاه تماس بگیرید.
         </p>
       </div>
     </>
