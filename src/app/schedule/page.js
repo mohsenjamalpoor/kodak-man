@@ -1,15 +1,17 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   FaCalendarDays,
   FaCalendarCheck,
   FaClock,
   FaArrowUpRightFromSquare,
+  FaAngleDown,
 } from "react-icons/fa6";
 import PageHeader from "@/components/PageHeader";
 import SearchBox from "@/components/SearchBox";
 import DoctorAvatar from "@/components/DoctorAvatar";
+import SpecialtyModal from "@/components/SpecialtyModal";
 import { doctors, days } from "@/data/doctors";
 import { normalize } from "@/lib/utils";
 
@@ -67,10 +69,12 @@ const statusUI = {
 
 export default function SchedulePage() {
   const [q, setQ] = useState("");
-  const [spec, setSpec] = useState("همه");
   const [day, setDay] = useState("شنبه");
   const [today, setToday] = useState(null);
   const [now, setNow] = useState(null);
+  const [modalSpec, setModalSpec] = useState(null);
+
+  const closeModal = useCallback(() => setModalSpec(null), []);
 
   useEffect(() => {
     const tick = () => {
@@ -90,17 +94,16 @@ export default function SchedulePage() {
     const n = normalize(q);
     return doctors
       .filter((d) => d.schedule[day])
-      .filter((d) => spec === "همه" || d.specialty === spec)
       .filter((d) => !n || normalize(d.name + " " + d.specialty).includes(n))
       .map((d) => ({ doc: d, time: d.schedule[day] }));
-  }, [q, spec, day]);
+  }, [q, day]);
 
   return (
     <>
       <PageHeader icon={FaCalendarDays} title="برنامه هفتگی درمانگاه" />
 
       <div className="mx-auto max-w-3xl px-3 pb-6">
-        {/* جستجو و فیلتر (غیرچسبان) */}
+        {/* جستجو، روزها و تخصص‌ها (غیرچسبان) */}
         <div className="space-y-2 py-2.5">
           <SearchBox
             value={q}
@@ -138,18 +141,16 @@ export default function SchedulePage() {
             })}
           </div>
 
-          <div className="-mx-3 flex gap-1.5 overflow-x-auto px-3 [scrollbar-width:none]">
-            {["همه", ...specialties].map((s) => (
+          {/* انواع تخصص‌ها: با لمس، مودال پزشکان آن تخصص باز می‌شود */}
+          <div className="-mx-3 flex gap-1.5 overflow-x-auto px-3 pb-0.5 [scrollbar-width:none]">
+            {specialties.map((s) => (
               <button
                 key={s}
-                onClick={() => setSpec(s)}
-                className={`shrink-0 rounded-full px-3 py-1 text-[11px] font-medium transition active:scale-95 ${
-                  spec === s
-                    ? "bg-slate-800 text-white"
-                    : "bg-white text-slate-600 ring-1 ring-slate-200"
-                }`}
+                onClick={() => setModalSpec(s)}
+                className="flex shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-teal-700 ring-1 ring-teal-200 transition active:scale-95"
               >
-                {s === "همه" ? "همه" : shortSpec(s)}
+                {shortSpec(s)}
+                <FaAngleDown className="text-[9px]" />
               </button>
             ))}
           </div>
@@ -163,7 +164,7 @@ export default function SchedulePage() {
               <Link
                 key={doc.id}
                 href={`/doctors/${doc.id}`}
-                className="relative flex flex-col items-center gap-0.5 rounded-xl bg-white px-2 pb-2 pt-2.5 text-center shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-lg active:scale-95"
+                className="relative flex flex-col items-center gap-1 rounded-xl bg-white px-2 pb-2 pt-2.5 text-center shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-lg active:scale-95"
               >
                 {st && (
                   <span
@@ -177,13 +178,13 @@ export default function SchedulePage() {
                   doctor={doc}
                   className="mt-1 h-12 w-12 text-lg md:h-14 md:w-14"
                 />
-                <h3 className="line-clamp-2 min-h-8 text-[11px] font-bold leading-4 text-slate-800">
+                <h3 className="line-clamp-2 min-h-8 text-[11px] font-medium leading-4 text-slate-600">
                   {doc.name}
                 </h3>
-                <p className="line-clamp-1 text-[9px] leading-4 text-teal-700">
-                  {shortSpec(doc.specialty)}
+                <p className="line-clamp-2 min-h-8 text-xs font-extrabold leading-4 text-teal-700">
+                  {doc.specialty}
                 </p>
-                <p className="mt-0.5 flex items-center gap-1 rounded-full bg-teal-50 px-2 py-0.5 text-[10px] font-bold leading-4 text-teal-700">
+                <p className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold leading-4 text-slate-700">
                   <FaClock className="shrink-0 text-[8px]" /> {time}
                 </p>
               </Link>
@@ -196,15 +197,14 @@ export default function SchedulePage() {
             <p className="text-xs text-slate-500">
               در {day} پزشکی با این مشخصات حضور ندارد.
             </p>
-            <button
-              onClick={() => {
-                setQ("");
-                setSpec("همه");
-              }}
-              className="mt-3 rounded-full bg-teal-600 px-4 py-1.5 text-[11px] font-bold text-white active:scale-95"
-            >
-              پاک کردن فیلترها
-            </button>
+            {q && (
+              <button
+                onClick={() => setQ("")}
+                className="mt-3 rounded-full bg-teal-600 px-4 py-1.5 text-[11px] font-bold text-white active:scale-95"
+              >
+                پاک کردن جستجو
+              </button>
+            )}
           </div>
         )}
 
@@ -231,6 +231,14 @@ export default function SchedulePage() {
           برنامه ممکن است تغییر کند؛ پیش از مراجعه تماس بگیرید.
         </p>
       </div>
+
+      {modalSpec && (
+        <SpecialtyModal
+          specialty={modalSpec}
+          today={today}
+          onClose={closeModal}
+        />
+      )}
     </>
   );
 }

@@ -158,7 +158,7 @@ export const doctors = [
     id: 16,
     name: "دکتر کمیل هادی پور",
     specialty: "تخصص کودکان",
-    image: null,
+    image: "/images/drhadipoor.jpg",
     bio: "ویزیت عمومی کودکان و نوزادان، بررسی تب و عفونت‌های شایع، مشاوره تغذیه و پایش رشد.",
     education: ["تخصص کودکان", "فلوشیپ نوزادان"],
     schedule: { دوشنبه: "۱۲:۰۰ - ۱۶:۰۰" },
