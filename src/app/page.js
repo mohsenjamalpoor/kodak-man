@@ -55,7 +55,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 md:grid-cols-2 md:py-16">
           <div>
             <h1 className="mb-4 text-3xl font-extrabold leading-snug">
-              بیمارستان فیروزآبادی
+              گروه کودکان بیمارستان آیت الله فیروزآبادی
             </h1>
             <p className="mt-1 text-sm font-medium text-teal-50 md:text-base">
               سلامت کودک شما، اولویت ماست.
