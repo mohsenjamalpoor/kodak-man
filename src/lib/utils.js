@@ -15,4 +15,5 @@ export const navLinks = [
   { href: "/parent-education", label: "آموزش والدین" },
   { href: "/news", label: "تازه‌های پزشکی" },
   { href: "/services", label: "خدمات و بخش‌ها" },
+  { href: "/facilities", label: "امکانات" },
 ];
