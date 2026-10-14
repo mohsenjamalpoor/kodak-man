@@ -175,4 +175,4 @@ export const doctors = [
 ];
 
 export const getDoctor = (id) =>
-  doctors.find((d) => String(d.id) === String(id));
+  doctors.find((doctor) => String(doctor.id) === String(id));
