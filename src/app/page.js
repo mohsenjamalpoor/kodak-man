@@ -5,6 +5,7 @@ import {
   FaBookOpen,
   FaNewspaper,
   FaHospital,
+  FaHouseMedical,
   FaBaby,
 } from "react-icons/fa6";
 
@@ -38,6 +39,12 @@ const features = [
     title: "بخش‌ها و خدمات",
     icon: FaHospital,
     color: "from-rose-500 to-pink-500",
+  },
+  {
+    href: "/facilities",
+    title: "امکانات بیمارستان",
+    icon: FaHouseMedical,
+    color: "from-indigo-500 to-blue-600",
   },
 ];
 
