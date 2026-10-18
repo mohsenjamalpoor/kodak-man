@@ -189,7 +189,7 @@ export const education = [
 
 ---
 
-**منبع:** «آگاهانه همراه» · [ble.ir/drelyasi_ped](https://ble.ir/drelyasi_ped)
+
 `,
   },
   {
@@ -247,7 +247,7 @@ export const education = [
 
 ---
 
-**منبع:** «آگاهانه همراه» · [ble.ir/drelyasi_ped](https://ble.ir/drelyasi_ped)
+
 `,
   },
   {
@@ -308,7 +308,7 @@ export const education = [
 
 ---
 
-**منبع:** «آگاهانه همراه» · [ble.ir/drelyasi_ped](https://ble.ir/drelyasi_ped)
+
 `,
   },
   {
@@ -355,7 +355,7 @@ export const education = [
 
 ---
 
-**منبع:** «آگاهانه همراه» · [ble.ir/drelyasi_ped](https://ble.ir/drelyasi_ped)
+
 `,
   },
   {
@@ -378,7 +378,7 @@ export const education = [
 
 ---
 
-**منبع:** «آگاهانه همراه» · [ble.ir/drelyasi_ped](https://ble.ir/drelyasi_ped)
+
 `,
   },
   {
@@ -421,7 +421,7 @@ export const education = [
 
 ---
 
-**منبع:** «آگاهانه همراه» · [ble.ir/drelyasi_ped](https://ble.ir/drelyasi_ped)
+
 `,
   },
   {
@@ -452,7 +452,7 @@ export const education = [
 
 ---
 
-**منبع:** «آگاهانه همراه» · [ble.ir/drelyasi_ped](https://ble.ir/drelyasi_ped)
+
 `,
   },
   {
@@ -492,7 +492,7 @@ export const education = [
 
 ---
 
-**منبع:** «آگاهانه همراه» · [ble.ir/drelyasi_ped](https://ble.ir/drelyasi_ped)
+
 `,
   },
 ];
