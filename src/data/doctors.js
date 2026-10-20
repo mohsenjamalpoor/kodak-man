@@ -172,6 +172,17 @@ export const doctors = [
     education: ["دانشگاه علوم پزشکی ایران"],
     schedule: { شنبه: "۰۸:۰۰ - ۱۲:۰۰" },
   },
+
+  {
+    id: 18,
+    name: "دکتر منصوره صادقی",
+    specialty: "تخصص کودکان",
+    image: "/images/drsadghi.jpg",
+    bio: "ویزیت عمومی کودکان و نوزادان، بررسی تب و عفونت‌های شایع، مشاوره تغذیه و پایش رشد.",
+    education: ["دانشگاه علوم پزشکی ایران"],
+    schedule: {},
+    note: " در درمانگاه ویزیت ندارند.",
+  },
 ];
 
 export const getDoctor = (id) =>
