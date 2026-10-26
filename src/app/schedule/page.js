@@ -25,8 +25,13 @@ const todayMap = {
   2: "سه‌شنبه",
   3: "چهارشنبه",
 };
-const specialties = [...new Set(doctors.map((d) => d.specialty))];
-const shortSpec = (s) => s.replace("فوق تخصص ", "");
+
+// فقط پزشکانی که حداقل یک روز درمانگاه دارند
+const hasClinic = (d) => days.some((day) => d.schedule[day]);
+const specialties = [
+  ...new Set(doctors.filter(hasClinic).map((d) => d.specialty)),
+];
+const shortSpec = (s) => s.replace("فوق تخصص ", "").trim();
 
 const toLatin = (s) => s.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
 const toMin = (t) => {
@@ -182,7 +187,7 @@ export default function SchedulePage() {
                   {doc.name}
                 </h3>
                 <p className="line-clamp-2 min-h-8 text-xs font-extrabold leading-4 text-teal-700">
-                  {doc.specialty}
+                  {doc.specialty.trim()}
                 </p>
                 <p className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold leading-4 text-slate-700">
                   <FaClock className="shrink-0 text-[8px]" /> {time}
