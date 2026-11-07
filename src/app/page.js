@@ -3,7 +3,7 @@ import {
   FaCalendarDays,
   FaUserDoctor,
   FaBookOpen,
-  FaNewspaper,
+  FaPills,
   FaHospital,
   FaHeadset,
   FaBaby,
@@ -29,9 +29,9 @@ const features = [
     color: "from-violet-500 to-purple-500",
   },
   {
-    href: "/news",
-    title: "تازه‌های پزشکی کودکان",
-    icon: FaNewspaper,
+    href: "/nutrition",
+    title: "تغذیه و دارو برای کودکان",
+    icon: FaPills,
     color: "from-orange-500 to-amber-500",
   },
   {
