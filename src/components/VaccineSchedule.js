@@ -66,7 +66,7 @@ export default function VaccineSchedule() {
         </p>
         <div
           role="tablist"
-          className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]"
+          className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-none"
         >
           {schedule.map((s, i) => (
             <button
