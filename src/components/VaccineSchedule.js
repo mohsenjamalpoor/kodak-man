@@ -161,7 +161,7 @@ export default function VaccineSchedule() {
           جدول خلاصه واکسن‌ها
         </h3>
         <div className="overflow-x-auto rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
-          <table className="w-full min-w-[480px] text-center text-[11px]">
+          <table className="w-full min-w-120 text-center text-[11px]">
             <thead>
               <tr>
                 <th className="sticky right-0 min-w-32 bg-slate-50 p-3 text-right text-xs font-bold text-slate-600">
