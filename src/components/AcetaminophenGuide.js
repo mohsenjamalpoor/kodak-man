@@ -68,7 +68,7 @@ export default function AcetaminophenGuide() {
         <input
           dir="ltr"
           inputMode="decimal"
-          placeholder="مثلاً 12.5"
+          placeholder="مثلاً 5"
           value={weight}
           onChange={(event) => setWeight(event.target.value)}
           className={inputCls}
