@@ -147,7 +147,7 @@ export default function SchedulePage() {
           </div>
 
           {/* انواع تخصص‌ها: با لمس، مودال پزشکان آن تخصص باز می‌شود */}
-          <div className="-mx-3 flex gap-1.5 overflow-x-auto px-3 pb-0.5 [scrollbar-width:none]">
+          <div className="-mx-3 flex gap-1.5 overflow-x-auto px-3 pb-0.5 scrollbar-none">
             {specialties.map((s) => (
               <button
                 key={s}
