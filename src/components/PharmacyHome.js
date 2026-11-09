@@ -121,6 +121,7 @@ export default function PharmacyHome() {
                 {slogan.title}
               </h2>
               <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-xs font-bold text-rose-600">
+                شیر مادر و شیر خشک
                 <FaChevronLeft className="text-[10px]" />
               </span>
             </div>
