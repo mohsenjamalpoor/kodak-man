@@ -10,26 +10,31 @@ import { products, getProduct } from "@/data/products";
 import { acetaminophenTypes } from "@/data/nutrition";
 
 export async function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+  return products.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const p = getProduct(slug);
-  return { title: p ? p.title : "محصول" };
+  const product = getProduct(slug);
+
+  return { title: product ? product.title : "محصول" };
 }
 
 async function Content({ params }) {
   const { slug } = await params;
-  const p = getProduct(slug);
-  if (!p) notFound();
+  const product = getProduct(slug);
 
-  const Icon = p.icon;
-  const isSupplement = p.category === "supplement";
+  if (!product) notFound();
+
+  const Icon = product.icon;
+  const isSupplement = product.category === "supplement";
   const backHref = isSupplement ? "/nutrition/supplements" : "/nutrition/drugs";
   const backLabel = isSupplement ? "مکمل‌ها" : "دارو";
   const related = products
-    .filter((x) => x.category === p.category && x.slug !== p.slug)
+    .filter(
+      (item) =>
+        item.category === product.category && item.slug !== product.slug,
+    )
     .slice(0, 2);
 
   return (
@@ -48,40 +53,33 @@ async function Content({ params }) {
       <div className="mx-auto -mt-10 max-w-3xl space-y-4 px-4 pb-10">
         <header className="rounded-3xl bg-white p-6 shadow-lg shadow-slate-200 ring-1 ring-slate-200">
           <span
-            className={`-mt-14 mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-linear-to-br ${p.color} text-3xl text-white shadow-lg ring-4 ring-white`}
+            className={`-mt-14 mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-linear-to-br ${product.color} text-3xl text-white shadow-lg ring-4 ring-white`}
           >
             <Icon />
           </span>
-          {p.tag && (
+          {product.tag && (
             <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-700">
-              {p.tag}
+              {product.tag}
             </span>
           )}
           <h1 className="mt-3 text-xl font-extrabold leading-9 text-slate-900">
-            {p.title}
+            {product.title}
           </h1>
-          <p className="mt-1 text-sm leading-7 text-slate-500">{p.sub}</p>
+          <p className="mt-1 text-sm leading-7 text-slate-500">{product.sub}</p>
         </header>
 
-        {p.slug === "acetaminophen" ? (
+        {product.slug === "acetaminophen" ? (
           <>
             <AcetaminophenGuide />
             <div className="space-y-3 pt-2">
-              {acetaminophenTypes.map((t) => (
-                <InfoCard
-                  key={t.key}
-                  icon={t.icon}
-                  color={t.color}
-                  title={t.title}
-                  sub={t.sub}
-                  content={t.content}
-                />
+              {acetaminophenTypes.map((type) => (
+                <InfoCard key={type.key} {...type} />
               ))}
             </div>
           </>
         ) : (
           <article className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-            <Markdown>{p.content}</Markdown>
+            <Markdown>{product.content}</Markdown>
           </article>
         )}
 
@@ -95,8 +93,8 @@ async function Content({ params }) {
           <section className="pt-2">
             <h2 className="mb-3 font-bold text-slate-800">محصولات مرتبط</h2>
             <div className="grid grid-cols-2 gap-3">
-              {related.map((r) => (
-                <ProductCard key={r.slug} p={r} />
+              {related.map((relatedProduct) => (
+                <ProductCard key={relatedProduct.slug} p={relatedProduct} />
               ))}
             </div>
           </section>
