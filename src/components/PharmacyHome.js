@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
@@ -8,6 +9,7 @@ import {
   FaWeightScale,
   FaHeart,
   FaChevronLeft,
+  FaSyringe,
 } from "react-icons/fa6";
 import SearchBox from "@/components/SearchBox";
 import ProductCard from "@/components/ProductCard";
@@ -40,6 +42,13 @@ const cats = [
     icon: FaWeightScale,
     color: "from-rose-500 to-pink-600",
   },
+  // مسیر جدید: برنامه، نوبت‌ها و مراقبت‌های واکسیناسیون
+  {
+    href: "/nutrition/vaccination",
+    label: "واکسیناسیون",
+    icon: FaSyringe,
+    color: "from-violet-500 to-indigo-600",
+  },
 ];
 
 function SectionHead({ title, href, accent }) {
@@ -62,13 +71,13 @@ function SectionHead({ title, href, accent }) {
 
 export default function PharmacyHome() {
   const [q, setQ] = useState("");
-
   const results = useMemo(() => {
     const n = normalize(q);
-    if (!n) return null;
-    return products.filter((p) =>
-      normalize(`${p.title} ${p.sub} ${p.tag || ""}`).includes(n),
-    );
+    return n
+      ? products.filter((p) =>
+          normalize(`${p.title} ${p.sub} ${p.tag || ""}`).includes(n),
+        )
+      : null;
   }, [q]);
 
   return (
@@ -78,11 +87,10 @@ export default function PharmacyHome() {
         onChange={setQ}
         placeholder="جستجوی دارو، مکمل و مراقبت..."
       />
-
       {results ? (
         <section>
           <p className="mb-3 text-xs text-slate-400">نتیجه جستجو</p>
-          {results.length > 0 ? (
+          {results.length ? (
             <div className="grid grid-cols-2 gap-3 md:gap-5">
               {results.map((p) => (
                 <ProductCard key={p.slug} p={p} />
@@ -102,7 +110,6 @@ export default function PharmacyHome() {
         </section>
       ) : (
         <>
-          {/* بنر شیر مادر */}
           <Link
             href="/nutrition/feeding"
             className="relative block overflow-hidden rounded-3xl bg-linear-to-br from-pink-500 to-rose-600 p-5 text-white shadow-lg shadow-rose-200 transition active:scale-[0.98]"
@@ -119,9 +126,7 @@ export default function PharmacyHome() {
               </span>
             </div>
           </Link>
-
-          {/* دسته‌بندی‌ها */}
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-5 gap-2">
             {cats.map(({ href, label, icon: Icon, color }) => (
               <Link
                 key={href}
@@ -139,8 +144,6 @@ export default function PharmacyHome() {
               </Link>
             ))}
           </div>
-
-          {/* مکمل‌ها */}
           <section>
             <SectionHead
               title="مکمل‌ها"
@@ -153,8 +156,6 @@ export default function PharmacyHome() {
               ))}
             </div>
           </section>
-
-          {/* دارو */}
           <section>
             <SectionHead
               title="دارو"
