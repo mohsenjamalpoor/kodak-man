@@ -37,17 +37,16 @@ const cats = [
     color: "from-sky-500 to-blue-600",
   },
   {
-    href: "/nutrition/p/acetaminophen",
-    label: "دوز استامینوفن",
-    icon: FaWeightScale,
-    color: "from-rose-500 to-pink-600",
-  },
-  // مسیر جدید: برنامه، نوبت‌ها و مراقبت‌های واکسیناسیون
-  {
     href: "/nutrition/vaccination",
     label: "واکسیناسیون",
     icon: FaSyringe,
     color: "from-violet-500 to-indigo-600",
+  },
+  {
+    href: "/nutrition/p/acetaminophen",
+    label: "دوز استامینوفن",
+    icon: FaWeightScale,
+    color: "from-rose-500 to-pink-600",
   },
 ];
 
