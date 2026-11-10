@@ -54,7 +54,7 @@ export default function AcetaminophenGuide() {
         ? round(kg / 2)
         : Math.round(kg * 2)
       : null;
-  const amountUnit = form === "syrup" ? "میلی‌لیتر" : "قطره";
+  const amountUnit = form === "syrup" ? "سی سی" : "قطره";
 
   return (
     <div className="space-y-4">
