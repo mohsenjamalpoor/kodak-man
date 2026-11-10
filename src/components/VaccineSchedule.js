@@ -154,57 +154,6 @@ export default function VaccineSchedule() {
           })}
         </ul>
       </section>
-
-      {/* جدول خلاصه */}
-      <section>
-        <h3 className="mb-3 text-sm font-extrabold text-slate-800">
-          جدول خلاصه واکسن‌ها
-        </h3>
-        <div className="overflow-x-auto rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
-          <table className="w-full min-w-120 text-center text-[11px]">
-            <thead>
-              <tr>
-                <th className="sticky right-0 min-w-32 bg-slate-50 p-3 text-right text-xs font-bold text-slate-600">
-                  واکسن
-                </th>
-                {schedule.map((s, i) => (
-                  <th
-                    key={s.age}
-                    className={`whitespace-nowrap p-2 font-bold ${
-                      i === idx
-                        ? "bg-teal-50 text-teal-700"
-                        : "bg-slate-50 text-slate-600"
-                    }`}
-                  >
-                    {s.age}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {order.map((k) => (
-                <tr key={k} className="border-t border-slate-100">
-                  <th className="sticky right-0 bg-white p-3 text-right text-xs font-bold text-slate-700">
-                    {vaccineInfo[k].name}
-                  </th>
-                  {schedule.map((s, i) => (
-                    <td
-                      key={s.age}
-                      className={i === idx ? "bg-teal-50/60" : ""}
-                    >
-                      {s.vaccines.includes(k) ? (
-                        <FaCircleCheck className="mx-auto text-base text-emerald-500" />
-                      ) : (
-                        <span className="text-slate-200">—</span>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
     </div>
   );
 }
