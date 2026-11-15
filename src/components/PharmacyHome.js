@@ -36,7 +36,7 @@ const cats = [
     color: "from-sky-500 to-blue-600",
   },
   {
-    href: "/vaccination",
+    href: "/nutrition/vaccination",
     label: "واکسیناسیون",
     icon: FaSyringe,
     color: "from-violet-500 to-indigo-600",
