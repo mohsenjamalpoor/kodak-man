@@ -7,14 +7,13 @@ import {
   FaCapsules,
   FaPills,
   FaWeightScale,
-  FaHeart,
   FaChevronLeft,
   FaSyringe,
 } from "react-icons/fa6";
 import SearchBox from "@/components/SearchBox";
 import ProductCard from "@/components/ProductCard";
+import AdBanner from "@/components/AdBanner";
 import { supplementProducts, drugProducts, products } from "@/data/products";
-import { slogan } from "@/data/nutrition";
 import { normalize } from "@/lib/utils";
 
 const cats = [
@@ -37,7 +36,7 @@ const cats = [
     color: "from-sky-500 to-blue-600",
   },
   {
-    href: "/nutrition/vaccination",
+    href: "/vaccination",
     label: "واکسیناسیون",
     icon: FaSyringe,
     color: "from-violet-500 to-indigo-600",
@@ -109,22 +108,8 @@ export default function PharmacyHome() {
         </section>
       ) : (
         <>
-          <Link
-            href="/nutrition/feeding"
-            className="relative block overflow-hidden rounded-3xl bg-linear-to-br from-pink-500 to-rose-600 p-5 text-white shadow-lg shadow-rose-200 transition active:scale-[0.98]"
-          >
-            <FaHeart className="pointer-events-none absolute -bottom-8 -left-6 rotate-12 text-[8rem] text-white/10" />
-            <div className="relative">
-              <p className="text-xs text-rose-100">تغذیه نوزاد و کودک</p>
-              <h2 className="mt-1 text-lg font-extrabold leading-8">
-                {slogan.title}
-              </h2>
-              <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-xs font-bold text-rose-600">
-                شیر مادر و شیر خشک
-                <FaChevronLeft className="text-[10px]" />
-              </span>
-            </div>
-          </Link>
+          <AdBanner />
+
           <div className="grid grid-cols-5 gap-2">
             {cats.map(({ href, label, icon: Icon, color }) => (
               <Link
