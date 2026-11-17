@@ -39,7 +39,14 @@ export default function FeedingPage() {
         </SectionTitle>
         <div className="space-y-3">
           {formulas.map((f) => (
-            <InfoCard key={f.key} {...f} />
+            <InfoCard
+              key={f.key}
+              icon={f.icon}
+              color={f.color}
+              title={f.title}
+              sub={f.sub}
+              content={f.content}
+            />
           ))}
         </div>
 
@@ -54,7 +61,14 @@ export default function FeedingPage() {
           </SectionTitle>
           <div className="space-y-3">
             {supplements.map((s) => (
-              <InfoCard key={s.key} {...s} />
+              <InfoCard
+                key={s.key}
+                icon={s.icon}
+                color={s.color}
+                title={s.title}
+                sub={s.sub}
+                content={s.content}
+              />
             ))}
           </div>
         </div>
