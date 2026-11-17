@@ -8,7 +8,6 @@ import {
   FaPills,
   FaWeightScale,
   FaChevronLeft,
-  FaSyringe,
 } from "react-icons/fa6";
 import SearchBox from "@/components/SearchBox";
 import ProductCard from "@/components/ProductCard";
@@ -34,12 +33,6 @@ const cats = [
     label: "دارو",
     icon: FaPills,
     color: "from-sky-500 to-blue-600",
-  },
-  {
-    href: "/nutrition/vaccination",
-    label: "واکسیناسیون",
-    icon: FaSyringe,
-    color: "from-violet-500 to-indigo-600",
   },
   {
     href: "/nutrition/p/acetaminophen",

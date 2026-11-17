@@ -74,8 +74,8 @@ function Slide({ b, active }) {
   );
 }
 
-export default function AdBanner() {
-  const n = banners.length;
+export default function AdBanner({ items = banners }) {
+  const n = items.length;
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
   const startX = useRef(0);
@@ -114,7 +114,7 @@ export default function AdBanner() {
         className="flex transition-transform duration-500 ease-out"
         style={{ transform: `translateX(${i * 100}%)` }}
       >
-        {banners.map((b, idx) => (
+        {items.map((b, idx) => (
           <div
             key={b.id}
             className="h-40 w-full shrink-0 md:h-48"
@@ -127,7 +127,7 @@ export default function AdBanner() {
 
       {n > 1 && (
         <div className="absolute inset-x-0 bottom-2.5 flex justify-center gap-1.5">
-          {banners.map((b, idx) => (
+          {items.map((b, idx) => (
             <button
               key={b.id}
               onClick={() => setI(idx)}
