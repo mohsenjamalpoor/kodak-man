@@ -13,7 +13,7 @@ export const topics = [
   {
     slug: "vaccination",
     title: "واکسیناسیون",
-    sub: "برنامه واکسن تا ۲ سالگی",
+    sub: "برنامه واکسن تا ۱۸ ماهگی",
     icon: FaSyringe,
     color: "from-blue-500 to-indigo-600",
     href: "/vaccination",

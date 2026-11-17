@@ -6,7 +6,7 @@ export const eduBanners = [
     ad: false,
     tag: "یادآوری",
     title: "واکسن به‌موقع، کودک سالم",
-    text: "برنامه واکسن از بدو تولد تا ۲ سالگی را ببینید.",
+    text: "برنامه واکسن از بدو تولد تا ۱۸ ماهگی  را ببینید.",
     cta: "واکسیناسیون",
     href: "/vaccination",
     color: "from-blue-500 to-indigo-600",
