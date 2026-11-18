@@ -30,7 +30,7 @@ export default function Page() {
         <section>
           <h2 className="mb-3 flex items-center gap-2 text-base font-extrabold text-slate-800">
             <span className="h-5 w-1.5 rounded-full bg-violet-500" />
-            موضوع‌ها
+            موضوعات آموزشی
           </h2>
 
           <div className="grid grid-cols-2 gap-3 md:gap-5">
