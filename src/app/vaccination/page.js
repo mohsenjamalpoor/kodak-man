@@ -16,7 +16,7 @@ export default function VaccinationPage() {
         <section className="relative overflow-hidden rounded-3xl bg-linear-to-br from-sky-500 to-blue-600 px-5 py-4 text-white shadow-lg shadow-sky-200">
           <FaShieldHeart className="pointer-events-none absolute -bottom-5 -left-3 rotate-12 text-8xl text-white/10" />
           <h2 className="relative text-base font-extrabold">
-            واکسیناسیون از بدو تولد تا ۲ سالگی
+            واکسیناسیون از بدو تولد تا ۱۸ ماهگی
           </h2>
           <p className="relative mt-1 text-xs leading-6 text-sky-50">
             سن کودک را انتخاب کنید و واکسن‌های همان نوبت را ببینید.
