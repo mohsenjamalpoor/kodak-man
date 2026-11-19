@@ -23,8 +23,8 @@ export const callItems = [
   {
     key: "mobile",
     title: "موبایل",
-    value: "۰۹۱۲-۰۰۰-۰۰۰۰",
-    href: "tel:09120000000",
+    value: "09358511175",
+    href: "tel:09358511175",
     icon: FaMobileScreenButton,
     color: "from-sky-500 to-blue-600",
   },
@@ -32,8 +32,8 @@ export const callItems = [
 
 // شماره پیامک پیشنهادات و نظرات
 export const sms = {
-  value: "۰۹۱۲-۰۰۰-۰۰۰۰",
-  href: "sms:09120000000",
+  value: "09358511175",
+  href: "sms:09358511175",
 };
 
 // پیام‌رسان‌ها و شبکه‌های اجتماعی
