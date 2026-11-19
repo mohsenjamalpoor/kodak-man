@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { FaBaby, FaBars, FaXmark } from "react-icons/fa6";
+import { FaBars, FaXmark } from "react-icons/fa6";
 import { navLinks } from "@/lib/utils";
 
 export default function Header() {
@@ -15,9 +15,14 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2.5">
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-linear-to-br from-teal-500 to-sky-500 text-lg text-white">
-            <FaBaby />
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/site-logo.png"
+            alt="لوگوی کودک من"
+            width={44}
+            height={40}
+            className="h-10 w-auto shrink-0"
+          />
           <span className="flex flex-col leading-tight">
             <span className="text-lg font-extrabold text-teal-700">
               کودک من
