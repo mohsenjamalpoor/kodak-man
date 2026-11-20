@@ -48,12 +48,6 @@ export default function VaccinationPage() {
             ))}
           </div>
         </div>
-
-        <p className="rounded-2xl bg-slate-100 p-4 text-xs leading-6 text-slate-500">
-          جدول واکسن ممکن است توسط وزارت بهداشت به‌روز شود؛ برای برنامه دقیق
-          کودک خود با مرکز بهداشت یا پزشک مشورت کنید. این مطلب جایگزین مشاوره
-          پزشک نیست.
-        </p>
       </div>
     </>
   );
