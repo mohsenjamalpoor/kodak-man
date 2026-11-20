@@ -30,10 +30,10 @@ export default function VaccinationPage() {
         <div className="pt-2">
           <SectionTitle
             icon={FaShieldHeart}
-            color="bg-emerald-50 text-emerald-600"
+            color="bg-sky-50 text-sky-700"
             note="قبل، هنگام و بعد از واکسن چه کارهایی انجام دهیم؟ برای دیدن جزئیات، روی هر مورد بزنید."
           >
-            مراقبت‌ها و کارهای والدین
+            آنچه درباره واکسیناسیون باید بدانیم
           </SectionTitle>
           <div className="space-y-3">
             {careCards.map((c) => (
