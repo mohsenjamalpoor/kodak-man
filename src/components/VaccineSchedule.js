@@ -42,7 +42,7 @@ function AgeButton({ s, active, onClick }) {
       aria-pressed={active}
       aria-expanded={active}
       onClick={onClick}
-      className={`flex h-10 flex-col items-center justify-center rounded-2xl transition active:scale-95 ${
+      className={`flex h-15 flex-col items-center justify-center rounded-2xl transition active:scale-95 ${
         active
           ? `bg-linear-to-br ${s.color} text-white shadow-lg`
           : "bg-white text-slate-700 ring-1 ring-slate-200"
