@@ -32,7 +32,7 @@ export default function Footer() {
       </div>
       <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
         تمامی حقوق متعلق به{" "}
-        <span className="text-base font-extrabold text-teal-300">
+        <span className="text-base font-extrabold text-teal-200">
           {" "}
           کودک من{" "}
         </span>
