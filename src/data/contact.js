@@ -44,7 +44,7 @@ export const messengers = [
     key: "bale",
     title: "بله",
     id: "",
-    href: "",
+    href: "https://ble.ir/picuf",
     icon: FaComments,
     color: "from-teal-400 to-cyan-600",
   },
