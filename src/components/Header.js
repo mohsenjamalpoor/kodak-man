@@ -24,7 +24,7 @@ export default function Header() {
             className="h-10 w-auto shrink-0"
           />
           <span className="flex flex-col leading-tight">
-            <span className="text-lg font-extrabold text-teal-700">
+            <span className="text-lg font-extrabold text-[#0f8ceb]">
               کودک من
             </span>
             <span className="text-[10px] font-medium text-slate-400">
