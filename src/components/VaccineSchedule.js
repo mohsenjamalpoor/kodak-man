@@ -42,7 +42,7 @@ function AgeButton({ s, active, onClick }) {
       aria-pressed={active}
       aria-expanded={active}
       onClick={onClick}
-      className={`flex h-20 flex-col items-center justify-center rounded-2xl transition active:scale-95 ${
+      className={`flex h-10 flex-col items-center justify-center rounded-2xl transition active:scale-95 ${
         active
           ? `bg-linear-to-br ${s.color} text-white shadow-lg`
           : "bg-white text-slate-700 ring-1 ring-slate-200"
@@ -144,7 +144,7 @@ export default function VaccineSchedule() {
                     className="flex w-full items-center gap-3 p-4 text-right transition active:bg-slate-50"
                   >
                     <span
-                      className={`grid h-8 w-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br text-lg text-white shadow-md ${
+                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br text-lg text-white shadow-md ${
                         m.oral
                           ? "from-amber-400 to-orange-500"
                           : "from-sky-500 to-blue-600"
