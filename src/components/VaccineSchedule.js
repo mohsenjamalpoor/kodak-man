@@ -4,6 +4,9 @@ import { FaSyringe, FaDroplet, FaBaby, FaChevronDown } from "react-icons/fa6";
 import { schedule, vaccineInfo } from "@/data/vaccines";
 import { faNum } from "@/lib/utils";
 
+// رنگ همه نوبت‌ها یکی است (آبی)
+const BLUE = "from-sky-500 to-blue-600";
+
 const meta = {
   bcg: {
     oral: false,
@@ -44,7 +47,7 @@ function AgeButton({ s, active, onClick }) {
       onClick={onClick}
       className={`flex h-15 flex-col items-center justify-center rounded-2xl transition active:scale-95 ${
         active
-          ? `bg-linear-to-br ${s.color} text-white shadow-lg`
+          ? `bg-linear-to-br ${BLUE} text-white shadow-lg shadow-sky-200`
           : "bg-white text-slate-700 ring-1 ring-slate-200"
       }`}
     >
@@ -118,7 +121,7 @@ export default function VaccineSchedule() {
       {cur && (
         <section ref={panelRef} aria-live="polite" className="scroll-mb-24">
           <div
-            className={`flex items-center justify-between rounded-t-3xl bg-linear-to-br ${cur.color} px-5 py-4 text-white`}
+            className={`flex items-center justify-between rounded-t-3xl bg-linear-to-br ${BLUE} px-5 py-4 text-white`}
           >
             <div>
               <h3 className="text-lg font-extrabold">{cur.age}</h3>
@@ -143,12 +146,9 @@ export default function VaccineSchedule() {
                     aria-expanded={isOpen}
                     className="flex w-full items-center gap-3 p-4 text-right transition active:bg-slate-50"
                   >
+                    {/* آیکن: همه آبی؛ تفاوت تزریقی/خوراکی فقط با شکل آیکن */}
                     <span
-                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br text-lg text-white shadow-md ${
-                        m.oral
-                          ? "from-amber-400 to-orange-500"
-                          : "from-sky-500 to-blue-600"
-                      }`}
+                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br ${BLUE} text-lg text-white shadow-md`}
                     >
                       {m.oral ? <FaDroplet /> : <FaSyringe />}
                     </span>
@@ -156,13 +156,7 @@ export default function VaccineSchedule() {
                       <span className="block text-sm font-extrabold leading-6 text-slate-800">
                         {v.name}
                       </span>
-                      <span
-                        className={`mt-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                          m.oral
-                            ? "bg-amber-50 text-amber-700"
-                            : "bg-sky-50 text-sky-700"
-                        }`}
-                      >
+                      <span className="mt-1 inline-block rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-bold text-sky-700">
                         {m.oral ? "خوراکی" : "تزریقی"}
                       </span>
                     </span>
