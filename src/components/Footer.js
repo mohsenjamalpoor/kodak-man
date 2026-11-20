@@ -31,7 +31,12 @@ export default function Footer() {
         </ul>
       </div>
       <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
-        © کودک من - تمامی حقوق محفوظ است
+        تمامی حقوق متعلق به{" "}
+        <span className="text-base font-extrabold text-teal-300">
+          {" "}
+          کودک من{" "}
+        </span>
+        میباشد
       </div>
     </footer>
   );
