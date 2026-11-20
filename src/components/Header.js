@@ -10,7 +10,7 @@ export default function Header() {
   const pathname = usePathname();
   const isActive = (href) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
-
+  //#0f8ceb
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
