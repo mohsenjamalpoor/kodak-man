@@ -51,16 +51,18 @@ const features = [
 export default function Home() {
   return (
     <>
-      <section className="bg-linear-to-br from-teal-600 via-teal-500 to-sky-500 text-white">
+      <section className="bg-[#0f8ceb] text-white">
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 md:grid-cols-2 md:py-16">
           <div>
             <h1 className="mb-4 text-xl font-extrabold leading-snug">
               گروه کودکان بیمارستان آیت الله فیروزآبادی
             </h1>
-            <p className="mt-1 text-sm font-medium text-teal-50 md:text-base">
+
+            <p className="mt-1 text-sm font-medium text-blue-50 md:text-base">
               سلامت کودک شما، اولویت ماست.
             </p>
           </div>
+
           <div className="hidden justify-center md:flex">
             <div className="grid h-64 w-64 place-items-center rounded-full bg-white/10 ring-8 ring-white/10">
               <FaBaby className="text-9xl text-white/90" />
