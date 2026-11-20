@@ -144,7 +144,7 @@ export default function VaccineSchedule() {
                     className="flex w-full items-center gap-3 p-4 text-right transition active:bg-slate-50"
                   >
                     <span
-                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br text-lg text-white shadow-md ${
+                      className={`grid h-8 w-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br text-lg text-white shadow-md ${
                         m.oral
                           ? "from-amber-400 to-orange-500"
                           : "from-sky-500 to-blue-600"
