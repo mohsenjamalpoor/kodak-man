@@ -27,7 +27,7 @@ const num = (s) => {
 };
 
 const field =
-  "w-full rounded-2xl border border-slate-200 bg-white py-3 pe-4 ps-11 text-right text-base font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100";
+  "w-full rounded-2xl border border-slate-200 bg-white/95 py-3 pe-4 ps-11 text-right text-base font-medium text-slate-800 outline-none backdrop-blur-sm transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100";
 
 function describe(z) {
   if (z < -3) {
@@ -122,6 +122,7 @@ export default function GrowthCalculator() {
       dir="rtl"
       className="
         relative
+        isolate
         overflow-hidden
         rounded-3xl
         bg-linear-to-br
@@ -132,22 +133,94 @@ export default function GrowthCalculator() {
         ring-sky-200
       "
     >
+      {/* =====================================================
+          MOBILE BACKGROUND
+          -----------------------------------------------------
+          در موبایل:
+          - عکس Background کل سکشن است
+          - کل عکس بدون Crop نمایش داده می‌شود
+          - زرافه در پایین و سمت چپ قرار می‌گیرد
+      ===================================================== */}
+
       <div
         className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-0
+          sm:hidden
+        "
+      >
+        {/* تصویر اصلی */}
+
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/growth/giraffe.webp"
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+          className="
+            absolute
+            inset-0
+            h-full
+            w-full
+            object-contain
+            object-left-bottom
+          "
+        />
+
+        {/* لایه خوانایی */}
+
+        <div
+          className="
+            absolute
+            inset-0
+            bg-white/55
+            backdrop-blur-[1px]
+          "
+        />
+      </div>
+
+      {/* =====================================================
+          CONTENT
+      ===================================================== */}
+
+      <div
+        className="
+          relative
+          z-10
           grid
           items-stretch
           sm:grid-cols-[62%_38%]
         "
       >
         {/* =====================================================
-            ستون فرم
+            FORM COLUMN
         ===================================================== */}
-        <div className="relative min-w-0 p-4 md:p-6">
+
+        <div
+          className="
+            relative
+            min-w-0
+            p-4
+            md:p-6
+          "
+        >
           {/* =================================================
-              Header
+              HEADER
           ================================================= */}
+
           <div className="mb-5 flex justify-center">
-            <div className="flex items-center justify-center gap-3">
+            <div
+              className="
+                flex
+                items-center
+                justify-center
+                gap-3
+              "
+            >
+              {/* آیکن */}
+
               <span
                 className="
                   grid
@@ -165,12 +238,28 @@ export default function GrowthCalculator() {
                 <FaCalculator />
               </span>
 
+              {/* عنوان */}
+
               <div className="text-center">
-                <h2 className="text-lg font-extrabold text-blue-950 md:text-xl">
+                <h2
+                  className="
+                    text-lg
+                    font-extrabold
+                    text-blue-950
+                    md:text-xl
+                  "
+                >
                   محاسبه‌گر رشد کودک
                 </h2>
 
-                <p className="mt-0.5 text-[11px] text-blue-900/70 md:text-xs">
+                <p
+                  className="
+                    mt-0.5
+                    text-[11px]
+                    text-blue-900/70
+                    md:text-xs
+                  "
+                >
                   قد کودک را با استاندارد WHO مقایسه کنید
                 </p>
               </div>
@@ -180,8 +269,12 @@ export default function GrowthCalculator() {
           {/* =================================================
               FORM
           ================================================= */}
+
           <form onSubmit={submit} className="space-y-3">
-            {/* جنسیت */}
+            {/* =================================================
+                GENDER
+            ================================================= */}
+
             <div className="grid grid-cols-2 gap-2.5">
               {[
                 {
@@ -203,22 +296,23 @@ export default function GrowthCalculator() {
                   onClick={() => setSex(k)}
                   aria-pressed={sex === k}
                   className={`
-                    flex
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-2xl
-                    py-3
-                    text-sm
-                    font-bold
-                    transition
-                    active:scale-[0.98]
-                    ${
-                      sex === k
-                        ? "bg-white shadow-md ring-2 ring-blue-500"
-                        : "bg-white/70 text-slate-500 ring-1 ring-white hover:bg-white"
-                    }
-                  `}
+                      flex
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-2xl
+                      py-3
+                      text-sm
+                      font-bold
+                      transition
+                      active:scale-[0.98]
+
+                      ${
+                        sex === k
+                          ? "bg-white shadow-md ring-2 ring-blue-500"
+                          : "bg-white/80 text-slate-500 ring-1 ring-white hover:bg-white"
+                      }
+                    `}
                 >
                   <Icon className={sex === k ? on : "text-slate-400"} />
 
@@ -228,8 +322,9 @@ export default function GrowthCalculator() {
             </div>
 
             {/* =================================================
-                سن کودک
+                AGE
             ================================================= */}
+
             <div className="relative">
               <FaCalendarDays
                 className="
@@ -260,8 +355,9 @@ export default function GrowthCalculator() {
             </div>
 
             {/* =================================================
-                قد کودک
+                HEIGHT
             ================================================= */}
+
             <div className="relative">
               <FaRulerVertical
                 className="
@@ -292,8 +388,9 @@ export default function GrowthCalculator() {
             </div>
 
             {/* =================================================
-                خطا
+                ERROR
             ================================================= */}
+
             {err && (
               <div
                 role="alert"
@@ -301,11 +398,12 @@ export default function GrowthCalculator() {
                   rounded-2xl
                   border
                   border-red-100
-                  bg-red-50
+                  bg-red-50/95
                   p-3
                   text-xs
                   leading-6
                   text-red-600
+                  shadow-sm
                 "
               >
                 {err}
@@ -313,10 +411,19 @@ export default function GrowthCalculator() {
             )}
 
             {/* =================================================
-                دکمه‌ها
+                ACTION BUTTONS
             ================================================= */}
-            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+
+            <div
+              className="
+                grid
+                grid-cols-1
+                gap-2.5
+                sm:grid-cols-2
+              "
+            >
               {/* مشاهده نتیجه */}
+
               <button
                 type="submit"
                 className="
@@ -343,6 +450,7 @@ export default function GrowthCalculator() {
               </button>
 
               {/* پاک کردن */}
+
               <button
                 type="button"
                 onClick={resetCalculator}
@@ -355,12 +463,13 @@ export default function GrowthCalculator() {
                   rounded-2xl
                   border
                   border-slate-200
-                  bg-white
+                  bg-white/95
                   py-3.5
                   text-sm
                   font-bold
                   text-slate-600
                   shadow-sm
+                  backdrop-blur-sm
                   transition
                   hover:border-red-200
                   hover:bg-red-50
@@ -374,23 +483,26 @@ export default function GrowthCalculator() {
             </div>
           </form>
 
-          {/* =================================================
+          {/* =====================================================
               RESULT
-          ================================================= */}
+          ===================================================== */}
+
           {res && info && (
             <div
               className="
                 mt-5
                 rounded-3xl
-                bg-white
+                bg-white/95
                 p-4
                 shadow-md
                 ring-1
                 ring-blue-100
+                backdrop-blur-sm
                 md:p-5
               "
             >
               {/* وضعیت */}
+
               <div className="flex items-start gap-3">
                 {info.tone === "ok" ? (
                   <FaCircleCheck
@@ -413,34 +525,97 @@ export default function GrowthCalculator() {
                 )}
 
                 <div className="min-w-0">
-                  <p className="text-sm font-extrabold text-slate-800">
+                  <p
+                    className="
+                      text-sm
+                      font-extrabold
+                      text-slate-800
+                    "
+                  >
                     {info.title}
                   </p>
 
-                  <p className="mt-1 text-xs leading-6 text-slate-500">
+                  <p
+                    className="
+                      mt-1
+                      text-xs
+                      leading-6
+                      text-slate-500
+                    "
+                  >
                     {info.text}
                   </p>
                 </div>
               </div>
 
-              {/* اطلاعات */}
-              <div className="mt-4 grid grid-cols-2 gap-2.5 text-center">
-                {/* صدک */}
-                <div className="rounded-2xl bg-blue-50 p-3">
-                  <p className="text-[11px] text-slate-500">صدک تقریبی</p>
+              {/* اطلاعات نتیجه */}
 
-                  <p className="mt-1 text-xl font-extrabold text-blue-800">
+              <div
+                className="
+                  mt-4
+                  grid
+                  grid-cols-2
+                  gap-2.5
+                  text-center
+                "
+              >
+                {/* صدک */}
+
+                <div
+                  className="
+                    rounded-2xl
+                    bg-blue-50
+                    p-3
+                  "
+                >
+                  <p
+                    className="
+                      text-[11px]
+                      text-slate-500
+                    "
+                  >
+                    صدک تقریبی
+                  </p>
+
+                  <p
+                    className="
+                      mt-1
+                      text-xl
+                      font-extrabold
+                      text-blue-800
+                    "
+                  >
                     {pctText}
                   </p>
                 </div>
 
                 {/* میانه */}
-                <div className="rounded-2xl bg-blue-50 p-3">
-                  <p className="text-[11px] leading-5 text-slate-500">
+
+                <div
+                  className="
+                    rounded-2xl
+                    bg-blue-50
+                    p-3
+                  "
+                >
+                  <p
+                    className="
+                      text-[11px]
+                      leading-5
+                      text-slate-500
+                    "
+                  >
                     میانه WHO در این سن
                   </p>
 
-                  <p className="mt-1 text-xl font-extrabold text-blue-800">
+                  <p
+                    className="
+                      mt-1
+                      text-xl
+                      font-extrabold
+                      text-blue-800
+                    "
+                  >
                     {faNum(Math.round(res.median * 10) / 10)}{" "}
                     <span className="text-xs">سانتی‌متر</span>
                   </p>
@@ -448,8 +623,9 @@ export default function GrowthCalculator() {
               </div>
 
               {/* =================================================
-                  نمودار صدک
+                  PERCENTILE BAR
               ================================================= */}
+
               <div dir="ltr" className="mt-5 px-2">
                 <div
                   className="
@@ -500,8 +676,9 @@ export default function GrowthCalculator() {
           )}
 
           {/* =================================================
-              توضیح
+              FOOTNOTE
           ================================================= */}
+
           <p
             className="
               mt-3
@@ -516,9 +693,12 @@ export default function GrowthCalculator() {
         </div>
 
         {/* =====================================================
-            ستون تصویر
-            تصویر تمام ارتفاع سکشن را می‌گیرد
+            DESKTOP IMAGE
+            -----------------------------------------------------
+            در موبایل مخفی است.
+            در دسکتاپ تصویر سمت چپ قرار می‌گیرد.
         ===================================================== */}
+
         <div
           className="
             relative
