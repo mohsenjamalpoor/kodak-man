@@ -446,7 +446,7 @@ export default function GrowthCalculator() {
                 "
               >
                 <FaChartSimple />
-                مشاهده نتیجه
+                بررسی رشد
               </button>
 
               {/* پاک کردن */}
