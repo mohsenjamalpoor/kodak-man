@@ -37,7 +37,8 @@ export default function GrowthPage() {
           <GrowthTopics />
         </section>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        {/* items-start: با باز شدن نتیجه محاسبه‌گر، کادر مراحل کش نیاید */}
+        <div className="grid gap-4 md:grid-cols-2 md:items-start">
           <GrowthCalculator />
           <GrowthStages />
         </div>
@@ -51,7 +52,7 @@ export default function GrowthPage() {
             draggable={false}
             className="h-40 w-full object-cover object-left md:absolute md:inset-y-0 md:left-0 md:h-full md:w-2/5"
           />
-          <div className="relative p-5 md:w-3/5 md:ms-auto md:py-8">
+          <div className="relative p-5 md:ms-auto md:w-3/5 md:py-8">
             <h2 className="flex items-center gap-2 text-lg font-extrabold text-blue-950">
               <FaLightbulb className="text-amber-400" />
               نکات طلایی برای رشد بهتر

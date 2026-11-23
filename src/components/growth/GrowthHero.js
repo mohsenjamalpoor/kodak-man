@@ -14,7 +14,7 @@ function SlideImage({ s }) {
         src={s.image}
         alt=""
         draggable={false}
-        className="absolute bottom-0 left-0 h-full w-[52%] object-cover object-left"
+        className="absolute bottom-0 left-0 h-full w-[46%] object-cover object-[62%_50%] md:w-[52%] md:object-left"
       />
     );
   }
@@ -25,7 +25,7 @@ function SlideImage({ s }) {
         src={s.image}
         alt=""
         draggable={false}
-        className="absolute bottom-0 left-3 h-[92%] w-auto object-contain"
+        className="absolute bottom-0 left-2 h-[90%] w-auto max-w-[40%] object-contain object-bottom md:left-8 md:h-[94%]"
       />
     );
   }
@@ -35,7 +35,7 @@ function SlideImage({ s }) {
       src={s.image}
       alt=""
       draggable={false}
-      className="absolute bottom-4 left-4 h-[62%] w-auto object-contain drop-shadow-lg"
+      className="absolute bottom-5 left-3 h-[50%] w-auto max-w-[40%] object-contain drop-shadow-lg md:bottom-8 md:left-10 md:h-[62%]"
     />
   );
 }
@@ -45,19 +45,20 @@ function Slide({ s, active }) {
     <div className="relative h-full w-full overflow-hidden bg-linear-to-br from-sky-50 via-blue-50 to-sky-100">
       <span className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-white/60" />
       <SlideImage s={s} />
-      <div className="relative flex h-full flex-col items-start justify-center gap-2 pe-[46%] ps-5 md:gap-3 md:pe-[48%]">
-        <span className="rounded-full bg-sky-200/70 px-3 py-1 text-[11px] font-bold text-blue-900 md:text-sm">
+
+      <div className="relative flex h-full flex-col items-start justify-center gap-1.5 pb-5 pe-[44%] ps-4 md:gap-3 md:pb-0 md:pe-[50%] md:ps-8">
+        <span className="rounded-full bg-sky-200/70 px-2.5 py-0.5 text-[10px] font-bold text-blue-900 md:px-3 md:py-1 md:text-sm">
           {s.pill}
         </span>
-        <h2 className="text-3xl font-extrabold leading-tight text-blue-950 md:text-5xl">
+        <h2 className="text-2xl font-extrabold leading-tight text-blue-950 min-[400px]:text-3xl md:text-5xl">
           {s.title}
         </h2>
-        <p className="text-xs leading-6 text-blue-900/80 md:text-base md:leading-8">
+        <p className="hidden line-clamp-3 text-[11px] leading-5 text-blue-900/80 min-[360px]:block md:line-clamp-none md:text-base md:leading-8">
           {s.text}
         </p>
-        <span className="mt-1 inline-flex items-center gap-2 rounded-full bg-blue-900 px-5 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-900/20 md:text-sm">
+        <span className="mt-0.5 inline-flex items-center gap-1.5 rounded-full bg-blue-900 px-4 py-2 text-[11px] font-bold text-white shadow-lg shadow-blue-900/20 md:mt-1 md:gap-2 md:px-5 md:py-2.5 md:text-sm">
           {s.cta}
-          <FaArrowLeft className="text-[10px]" />
+          <FaArrowLeft className="text-[9px] md:text-[10px]" />
         </span>
       </div>
     </div>
@@ -119,7 +120,7 @@ export default function GrowthHero() {
         {heroSlides.map((s, idx) => (
           <div
             key={s.id}
-            className="h-56 w-full shrink-0 md:h-80"
+            className="h-52 w-full shrink-0 min-[400px]:h-56 md:h-80"
             aria-hidden={idx !== i}
           >
             <Slide s={s} active={idx === i} />
@@ -127,7 +128,7 @@ export default function GrowthHero() {
         ))}
       </div>
 
-      <div className="absolute inset-x-0 bottom-2.5 flex justify-center gap-1.5">
+      <div className="absolute inset-x-0 bottom-2 flex justify-center gap-1.5">
         {heroSlides.map((s, idx) => (
           <button
             key={s.id}
