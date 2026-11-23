@@ -1,17 +1,11 @@
 import Link from "next/link";
-import {
-  FaArrowRight,
-  FaArrowLeft,
-  FaLightbulb,
-  FaCircleCheck,
-} from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa6";
 import GrowthHero from "@/components/growth/GrowthHero";
 import GrowthTopics from "@/components/growth/GrowthTopics";
 import GrowthStages from "@/components/growth/GrowthStages";
 import GrowthCalculator from "@/components/growth/GrowthCalculator";
-import TopicArticles from "@/components/TopicArticles";
+import GrowthTips from "@/components/growth/GrowthTips";
 import { education } from "@/data/articles";
-import { tips } from "@/data/growth";
 
 export const metadata = { title: "رشد و تکامل" };
 
@@ -43,61 +37,7 @@ export default function GrowthPage() {
           <GrowthStages />
         </div>
 
-        {/* نکات طلایی */}
-        <section className="overflow-hidden rounded-3xl bg-linear-to-br from-sky-50 to-blue-100 shadow-sm ring-1 ring-sky-100 md:flex md:flex-row-reverse">
-          {/* عکس - سمت راست */}
-          <div className="flex w-full items-center justify-center md:w-2/5 md:shrink-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/growth/tips-mom.webp"
-              alt=""
-              draggable={false}
-              className="
-        h-auto
-        max-h-80
-        w-full
-        object-contain
-        md:max-h-none
-      "
-            />
-          </div>
-
-          {/* نکات - سمت چپ */}
-          <div className="flex-1 p-5 text-right md:p-8">
-            <h2 className="flex items-center gap-2 text-lg font-extrabold text-blue-950">
-              <FaLightbulb className="shrink-0 text-amber-400" />
-              <span>نکات طلایی برای رشد بهتر</span>
-            </h2>
-
-            <ul className="mt-3 space-y-2.5">
-              {tips.map((t) => (
-                <li
-                  key={t}
-                  className="flex items-center gap-2.5 text-sm text-blue-950"
-                >
-                  <FaCircleCheck className="shrink-0 text-lg text-blue-600" />
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href="#articles"
-              className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-bold text-blue-800 shadow transition active:scale-95"
-            >
-              مطالعه نکات بیشتر
-              <FaArrowLeft className="text-[10px]" />
-            </a>
-          </div>
-        </section>
-
-        {/* مقاله‌ها */}
-        <section id="articles" className="scroll-mt-20">
-          <h2 className="mb-3 text-lg font-extrabold text-blue-950">
-            مقاله‌های رشد و تکامل
-          </h2>
-          <TopicArticles items={articles} basePath="/parent-education" />
-        </section>
+        <GrowthTips articles={articles} />
 
         <p className="rounded-2xl bg-slate-100 p-4 text-xs leading-6 text-slate-500">
           مطالب این صفحه جنبه آموزشی دارند و جایگزین مشاوره پزشک نیستند. رشد هر
