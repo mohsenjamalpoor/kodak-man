@@ -45,7 +45,7 @@ export const doctors = [
     id: 5,
     name: "دکتر وحید سعیدی",
     specialty: "فوق تخصص غدد کودکان",
-    image: "/images/drsaeidi.png",
+    image: "/images/drsaeidi.jpg",
     bio: "ارزیابی مسائل مربوط به رشد بلوغ تیرویید دیابت آدرنال وبیماری های متابولیک ارثی در گروه سنی کودکان و نوجوانان.",
     education: ["دانشگاه علوم پزشکی ایران"],
     schedule: { سه‌شنبه: "۱۱:۰۰ - ۰۸:۰۰" },
