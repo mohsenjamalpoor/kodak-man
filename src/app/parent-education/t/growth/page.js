@@ -46,13 +46,19 @@ export default function GrowthPage() {
         {/* نکات طلایی */}
         <section className="overflow-hidden rounded-3xl bg-linear-to-br from-sky-50 to-blue-100 shadow-sm ring-1 ring-sky-100 md:flex md:flex-row-reverse">
           {/* عکس - سمت راست */}
-          <div className="w-full md:w-2/5 md:shrink-0">
+          <div className="flex w-full items-center justify-center md:w-2/5 md:shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/growth/tips-mom.webp"
               alt=""
               draggable={false}
-              className="h-48 w-full object-cover object-left md:h-full"
+              className="
+        h-auto
+        max-h-80
+        w-full
+        object-contain
+        md:max-h-none
+      "
             />
           </div>
 
