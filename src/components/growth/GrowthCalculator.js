@@ -249,7 +249,7 @@ export default function GrowthCalculator() {
                     md:text-xl
                   "
                 >
-                  محاسبه‌گر رشد کودک
+                  بررسی رشد کودک
                 </h2>
 
                 <p
@@ -260,7 +260,7 @@ export default function GrowthCalculator() {
                     md:text-xs
                   "
                 >
-                  قد کودک را با استاندارد WHO مقایسه کنید
+                  وضعیت رشد فرزندتان را به سادگی بررسی کنید
                 </p>
               </div>
             </div>
