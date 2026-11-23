@@ -44,19 +44,25 @@ export default function GrowthPage() {
         </div>
 
         {/* نکات طلایی */}
-        <section className="relative overflow-hidden rounded-3xl bg-linear-to-br from-sky-50 to-blue-100 shadow-sm ring-1 ring-sky-100 md:flex md:items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/growth/tips-mom.webp"
-            alt=""
-            draggable={false}
-            className="h-40 w-full object-cover object-left md:absolute md:inset-y-0 md:left-0 md:h-full md:w-2/5"
-          />
-          <div className="relative p-5 md:ms-auto md:w-3/5 md:py-8">
+        <section className="overflow-hidden rounded-3xl bg-linear-to-br from-sky-50 to-blue-100 shadow-sm ring-1 ring-sky-100 md:flex md:flex-row-reverse">
+          {/* عکس - سمت راست */}
+          <div className="w-full md:w-2/5 md:shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/growth/tips-mom.webp"
+              alt=""
+              draggable={false}
+              className="h-48 w-full object-cover object-left md:h-full"
+            />
+          </div>
+
+          {/* نکات - سمت چپ */}
+          <div className="flex-1 p-5 text-right md:p-8">
             <h2 className="flex items-center gap-2 text-lg font-extrabold text-blue-950">
-              <FaLightbulb className="text-amber-400" />
-              نکات طلایی برای رشد بهتر
+              <FaLightbulb className="shrink-0 text-amber-400" />
+              <span>نکات طلایی برای رشد بهتر</span>
             </h2>
+
             <ul className="mt-3 space-y-2.5">
               {tips.map((t) => (
                 <li
@@ -64,10 +70,11 @@ export default function GrowthPage() {
                   className="flex items-center gap-2.5 text-sm text-blue-950"
                 >
                   <FaCircleCheck className="shrink-0 text-lg text-blue-600" />
-                  {t}
+                  <span>{t}</span>
                 </li>
               ))}
             </ul>
+
             <a
               href="#articles"
               className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-bold text-blue-800 shadow transition active:scale-95"
