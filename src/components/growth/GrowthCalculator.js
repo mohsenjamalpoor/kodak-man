@@ -120,33 +120,66 @@ export default function GrowthCalculator() {
     <section
       id="calculator"
       dir="rtl"
-      className="relative overflow-hidden rounded-3xl bg-linear-to-br from-sky-100 to-blue-100 p-4 shadow-sm ring-1 ring-sky-200 md:p-6"
+      className="
+        relative
+        overflow-hidden
+        rounded-3xl
+        bg-linear-to-br
+        from-sky-100
+        to-blue-100
+        shadow-sm
+        ring-1
+        ring-sky-200
+      "
     >
-      <div className="grid items-center gap-6 sm:grid-cols-[62%_38%]">
+      <div
+        className="
+          grid
+          items-stretch
+          sm:grid-cols-[62%_38%]
+        "
+      >
         {/* =====================================================
             ستون فرم
-        ====================================================== */}
-        <div className="relative min-w-0">
-          {/* Header */}
-          <div className="mb-5 text-center">
-            <div className="flex flex-col items-center">
-              <span className="mb-3 grid h-12 w-12 place-items-center rounded-2xl bg-blue-700 text-lg text-white shadow-md">
+        ===================================================== */}
+        <div className="relative min-w-0 p-4 md:p-6">
+          {/* =================================================
+              Header
+          ================================================= */}
+          <div className="mb-5 flex justify-center">
+            <div className="flex items-center justify-center gap-3">
+              <span
+                className="
+                  grid
+                  h-11
+                  w-11
+                  shrink-0
+                  place-items-center
+                  rounded-xl
+                  bg-blue-700
+                  text-lg
+                  text-white
+                  shadow-md
+                "
+              >
                 <FaCalculator />
               </span>
 
-              <h2 className="text-xl font-extrabold text-blue-950 md:text-2xl">
-                محاسبه‌گر رشد کودک
-              </h2>
+              <div className="text-center">
+                <h2 className="text-lg font-extrabold text-blue-950 md:text-xl">
+                  محاسبه‌گر رشد کودک
+                </h2>
 
-              <p className="mt-1 text-xs text-blue-900/70 md:text-sm">
-                قد کودک را با استاندارد WHO مقایسه کنید
-              </p>
+                <p className="mt-0.5 text-[11px] text-blue-900/70 md:text-xs">
+                  قد کودک را با استاندارد WHO مقایسه کنید
+                </p>
+              </div>
             </div>
           </div>
 
           {/* =================================================
               FORM
-          ================================================== */}
+          ================================================= */}
           <form onSubmit={submit} className="space-y-3">
             {/* جنسیت */}
             <div className="grid grid-cols-2 gap-2.5">
@@ -169,11 +202,23 @@ export default function GrowthCalculator() {
                   key={k}
                   onClick={() => setSex(k)}
                   aria-pressed={sex === k}
-                  className={`flex items-center justify-center gap-2 rounded-2xl py-3 text-sm font-bold transition active:scale-[0.98] ${
-                    sex === k
-                      ? "bg-white shadow-md ring-2 ring-blue-500"
-                      : "bg-white/70 text-slate-500 ring-1 ring-white hover:bg-white"
-                  }`}
+                  className={`
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-2xl
+                    py-3
+                    text-sm
+                    font-bold
+                    transition
+                    active:scale-[0.98]
+                    ${
+                      sex === k
+                        ? "bg-white shadow-md ring-2 ring-blue-500"
+                        : "bg-white/70 text-slate-500 ring-1 ring-white hover:bg-white"
+                    }
+                  `}
                 >
                   <Icon className={sex === k ? on : "text-slate-400"} />
 
@@ -182,9 +227,21 @@ export default function GrowthCalculator() {
               ))}
             </div>
 
-            {/* سن کودک */}
+            {/* =================================================
+                سن کودک
+            ================================================= */}
             <div className="relative">
-              <FaCalendarDays className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-blue-700" />
+              <FaCalendarDays
+                className="
+                  pointer-events-none
+                  absolute
+                  left-4
+                  top-1/2
+                  z-10
+                  -translate-y-1/2
+                  text-blue-700
+                "
+              />
 
               <input
                 inputMode="decimal"
@@ -202,9 +259,21 @@ export default function GrowthCalculator() {
               />
             </div>
 
-            {/* قد کودک */}
+            {/* =================================================
+                قد کودک
+            ================================================= */}
             <div className="relative">
-              <FaRulerVertical className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-blue-700" />
+              <FaRulerVertical
+                className="
+                  pointer-events-none
+                  absolute
+                  left-4
+                  top-1/2
+                  z-10
+                  -translate-y-1/2
+                  text-blue-700
+                "
+              />
 
               <input
                 inputMode="decimal"
@@ -222,11 +291,22 @@ export default function GrowthCalculator() {
               />
             </div>
 
-            {/* خطا */}
+            {/* =================================================
+                خطا
+            ================================================= */}
             {err && (
               <div
                 role="alert"
-                className="rounded-2xl border border-red-100 bg-red-50 p-3 text-xs leading-6 text-red-600"
+                className="
+                  rounded-2xl
+                  border
+                  border-red-100
+                  bg-red-50
+                  p-3
+                  text-xs
+                  leading-6
+                  text-red-600
+                "
               >
                 {err}
               </div>
@@ -234,12 +314,29 @@ export default function GrowthCalculator() {
 
             {/* =================================================
                 دکمه‌ها
-            ================================================== */}
+            ================================================= */}
             <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {/* مشاهده نتیجه */}
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-800 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-900/20 transition hover:bg-blue-900 active:scale-[0.98]"
+                className="
+                  flex
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-2xl
+                  bg-blue-800
+                  py-3.5
+                  text-sm
+                  font-bold
+                  text-white
+                  shadow-lg
+                  shadow-blue-900/20
+                  transition
+                  hover:bg-blue-900
+                  active:scale-[0.98]
+                "
               >
                 <FaChartSimple />
                 مشاهده نتیجه
@@ -249,7 +346,27 @@ export default function GrowthCalculator() {
               <button
                 type="button"
                 onClick={resetCalculator}
-                className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white py-3.5 text-sm font-bold text-slate-600 shadow-sm transition hover:border-red-200 hover:bg-red-50 hover:text-red-600 active:scale-[0.98]"
+                className="
+                  flex
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-2xl
+                  border
+                  border-slate-200
+                  bg-white
+                  py-3.5
+                  text-sm
+                  font-bold
+                  text-slate-600
+                  shadow-sm
+                  transition
+                  hover:border-red-200
+                  hover:bg-red-50
+                  hover:text-red-600
+                  active:scale-[0.98]
+                "
               >
                 <FaRotateLeft />
                 پاک کردن
@@ -259,15 +376,40 @@ export default function GrowthCalculator() {
 
           {/* =================================================
               RESULT
-          ================================================== */}
+          ================================================= */}
           {res && info && (
-            <div className="mt-5 rounded-3xl bg-white p-4 shadow-md ring-1 ring-blue-100 md:p-5">
+            <div
+              className="
+                mt-5
+                rounded-3xl
+                bg-white
+                p-4
+                shadow-md
+                ring-1
+                ring-blue-100
+                md:p-5
+              "
+            >
               {/* وضعیت */}
               <div className="flex items-start gap-3">
                 {info.tone === "ok" ? (
-                  <FaCircleCheck className="mt-1 shrink-0 text-xl text-emerald-500" />
+                  <FaCircleCheck
+                    className="
+                      mt-1
+                      shrink-0
+                      text-xl
+                      text-emerald-500
+                    "
+                  />
                 ) : (
-                  <FaTriangleExclamation className="mt-1 shrink-0 text-xl text-amber-500" />
+                  <FaTriangleExclamation
+                    className="
+                      mt-1
+                      shrink-0
+                      text-xl
+                      text-amber-500
+                    "
+                  />
                 )}
 
                 <div className="min-w-0">
@@ -305,18 +447,50 @@ export default function GrowthCalculator() {
                 </div>
               </div>
 
-              {/* نمودار صدک */}
+              {/* =================================================
+                  نمودار صدک
+              ================================================= */}
               <div dir="ltr" className="mt-5 px-2">
-                <div className="relative h-2.5 rounded-full bg-linear-to-r from-amber-300 via-emerald-400 to-amber-300">
+                <div
+                  className="
+                    relative
+                    h-2.5
+                    rounded-full
+                    bg-linear-to-r
+                    from-amber-300
+                    via-emerald-400
+                    to-amber-300
+                  "
+                >
                   <span
-                    className="absolute top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow ring-4 ring-blue-700"
+                    className="
+                      absolute
+                      top-1/2
+                      h-5
+                      w-5
+                      -translate-x-1/2
+                      -translate-y-1/2
+                      rounded-full
+                      bg-white
+                      shadow
+                      ring-4
+                      ring-blue-700
+                    "
                     style={{
                       left: `${pct}%`,
                     }}
                   />
                 </div>
 
-                <div className="mt-2 flex justify-between text-[10px] text-slate-400">
+                <div
+                  className="
+                    mt-2
+                    flex
+                    justify-between
+                    text-[10px]
+                    text-slate-400
+                  "
+                >
                   <span>۰</span>
                   <span>۵۰</span>
                   <span>۱۰۰</span>
@@ -325,8 +499,17 @@ export default function GrowthCalculator() {
             </div>
           )}
 
-          {/* توضیح */}
-          <p className="mt-3 text-[11px] leading-5 text-blue-900/60">
+          {/* =================================================
+              توضیح
+          ================================================= */}
+          <p
+            className="
+              mt-3
+              text-[11px]
+              leading-5
+              text-blue-900/60
+            "
+          >
             فقط برای ۰ تا {faNum(MAX_MONTHS)} ماه (قد خوابیده). این ابزار تشخیص
             پزشکی نیست.
           </p>
@@ -334,14 +517,34 @@ export default function GrowthCalculator() {
 
         {/* =====================================================
             ستون تصویر
-        ====================================================== */}
-        <div className="relative hidden min-h-[440px] items-end justify-center sm:flex">
+            تصویر تمام ارتفاع سکشن را می‌گیرد
+        ===================================================== */}
+        <div
+          className="
+            relative
+            hidden
+            min-h-[440px]
+            items-end
+            justify-center
+            sm:flex
+          "
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/growth/giraffe.webp"
-            alt=""
+            alt="تصویر رشد کودک"
             draggable={false}
-            className="pointer-events-none absolute bottom-0 left-1/2 h-[94%] w-auto -translate-x-1/2 object-contain"
+            className="
+              pointer-events-none
+              absolute
+              bottom-0
+              left-1/2
+              h-full
+              w-auto
+              max-w-none
+              -translate-x-1/2
+              object-contain
+            "
           />
         </div>
       </div>
