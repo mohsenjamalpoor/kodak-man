@@ -136,10 +136,7 @@ export default function GrowthCalculator() {
       {/* =====================================================
           MOBILE BACKGROUND
           -----------------------------------------------------
-          در موبایل:
-          - عکس Background کل سکشن است
-          - کل عکس بدون Crop نمایش داده می‌شود
-          - زرافه در پایین و سمت چپ قرار می‌گیرد
+          فقط در موبایل نمایش داده می‌شود.
       ===================================================== */}
 
       <div
@@ -148,11 +145,9 @@ export default function GrowthCalculator() {
           absolute
           inset-0
           z-0
-          sm:hidden
+          md:hidden
         "
       >
-        {/* تصویر اصلی */}
-
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/growth/giraffe.webp"
@@ -170,7 +165,6 @@ export default function GrowthCalculator() {
         />
 
         {/* لایه خوانایی */}
-
         <div
           className="
             absolute
@@ -182,7 +176,15 @@ export default function GrowthCalculator() {
       </div>
 
       {/* =====================================================
-          CONTENT
+          DESKTOP LAYOUT
+          -----------------------------------------------------
+          از 768px به بالا:
+
+          ستون اول = فرم + نتیجه
+          ستون دوم = تصویر
+
+          نکته:
+          md:grid-cols-[62%_38%]
       ===================================================== */}
 
       <div
@@ -191,12 +193,12 @@ export default function GrowthCalculator() {
           z-10
           grid
           items-stretch
-          sm:grid-cols-[62%_38%]
+          md:grid-cols-[62%_38%]
         "
       >
-        {/* =====================================================
-            FORM COLUMN
-        ===================================================== */}
+        {/* ===================================================
+            FORM + RESULT COLUMN
+        =================================================== */}
 
         <div
           className="
@@ -296,23 +298,23 @@ export default function GrowthCalculator() {
                   onClick={() => setSex(k)}
                   aria-pressed={sex === k}
                   className={`
-                      flex
-                      items-center
-                      justify-center
-                      gap-2
-                      rounded-2xl
-                      py-3
-                      text-sm
-                      font-bold
-                      transition
-                      active:scale-[0.98]
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-2xl
+                    py-3
+                    text-sm
+                    font-bold
+                    transition
+                    active:scale-[0.98]
 
-                      ${
-                        sex === k
-                          ? "bg-white shadow-md ring-2 ring-blue-500"
-                          : "bg-white/80 text-slate-500 ring-1 ring-white hover:bg-white"
-                      }
-                    `}
+                    ${
+                      sex === k
+                        ? "bg-white shadow-md ring-2 ring-blue-500"
+                        : "bg-white/80 text-slate-500 ring-1 ring-white hover:bg-white"
+                    }
+                  `}
                 >
                   <Icon className={sex === k ? on : "text-slate-400"} />
 
@@ -483,14 +485,16 @@ export default function GrowthCalculator() {
             </div>
           </form>
 
-          {/* =====================================================
+          {/* =================================================
               RESULT
-          ===================================================== */}
+          ================================================= */}
 
           {res && info && (
             <div
               className="
                 mt-5
+                min-w-0
+                overflow-hidden
                 rounded-3xl
                 bg-white/95
                 p-4
@@ -503,7 +507,14 @@ export default function GrowthCalculator() {
             >
               {/* وضعیت */}
 
-              <div className="flex items-start gap-3">
+              <div
+                className="
+                  flex
+                  min-w-0
+                  items-start
+                  gap-3
+                "
+              >
                 {info.tone === "ok" ? (
                   <FaCircleCheck
                     className="
@@ -524,7 +535,7 @@ export default function GrowthCalculator() {
                   />
                 )}
 
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p
                     className="
                       text-sm
@@ -538,6 +549,7 @@ export default function GrowthCalculator() {
                   <p
                     className="
                       mt-1
+                      break-words
                       text-xs
                       leading-6
                       text-slate-500
@@ -548,7 +560,9 @@ export default function GrowthCalculator() {
                 </div>
               </div>
 
-              {/* اطلاعات نتیجه */}
+              {/* =================================================
+                  اطلاعات نتیجه
+              ================================================= */}
 
               <div
                 className="
@@ -563,6 +577,7 @@ export default function GrowthCalculator() {
 
                 <div
                   className="
+                    min-w-0
                     rounded-2xl
                     bg-blue-50
                     p-3
@@ -593,6 +608,7 @@ export default function GrowthCalculator() {
 
                 <div
                   className="
+                    min-w-0
                     rounded-2xl
                     bg-blue-50
                     p-3
@@ -692,21 +708,22 @@ export default function GrowthCalculator() {
           </p>
         </div>
 
-        {/* =====================================================
-            DESKTOP IMAGE
-            -----------------------------------------------------
-            در موبایل مخفی است.
-            در دسکتاپ تصویر سمت چپ قرار می‌گیرد.
-        ===================================================== */}
+        {/* ===================================================
+            DESKTOP IMAGE COLUMN
+            ---------------------------------------------------
+            از 768px به بالا نمایش داده می‌شود.
+        =================================================== */}
 
         <div
           className="
             relative
             hidden
             min-h-[440px]
-            items-end
-            justify-center
-            sm:flex
+            min-w-0
+            overflow-hidden
+            md:flex
+            md:items-end
+            md:justify-center
           "
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -717,13 +734,12 @@ export default function GrowthCalculator() {
             className="
               pointer-events-none
               absolute
-              bottom-0
-              left-1/2
+              inset-0
               h-full
-              w-auto
-              max-w-none
-              -translate-x-1/2
+              w-full
+              max-w-full
               object-contain
+              object-center
             "
           />
         </div>
