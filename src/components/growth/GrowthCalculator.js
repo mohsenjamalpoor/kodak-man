@@ -34,26 +34,29 @@ const num = (s) => {
 function describe(kind, z) {
   const what = kind === "height" ? "قد" : "وزن";
 
-  if (z < -3)
+  if (z < -3) {
     return {
       tone: "warn",
       title: `${what} خیلی کمتر از معمول`,
       text: `${what} کودک خیلی پایین‌تر از محدوده معمول این سن است. برای بررسی روند رشد حتماً با پزشک مشورت کنید.`,
     };
+  }
 
-  if (z < -2)
+  if (z < -2) {
     return {
       tone: "warn",
       title: `${what} کمتر از معمول`,
       text: `${what} کودک پایین‌تر از محدوده معمول است. این نتیجه به‌تنهایی تشخیص نیست؛ با پزشک مشورت کنید.`,
     };
+  }
 
-  if (z > 2)
+  if (z > 2) {
     return {
       tone: "warn",
       title: `${what} بیشتر از معمول`,
       text: `${what} کودک بالاتر از محدوده معمول است. این نتیجه به‌تنهایی تشخیص نیست؛ با پزشک مشورت کنید.`,
     };
+  }
 
   return {
     tone: "ok",
@@ -71,7 +74,7 @@ function fmtPct(p) {
 
 function Row({ icon: Icon, label, unit, value, onChange, placeholder }) {
   return (
-    <label className="flex items-center gap-2 rounded-2xl bg-white px-3 py-2.5 shadow-sm ring-1 ring-sky-100 transition focus-within:ring-2 focus-within:ring-blue-500">
+    <label className="flex items-center gap-2 rounded-2xl bg-white/95 px-3 py-2.5 shadow-sm ring-1 ring-sky-100 backdrop-blur-sm transition focus-within:ring-2 focus-within:ring-blue-500">
       <Icon className="shrink-0 text-lg text-blue-700" />
 
       <span className="shrink-0 text-xs font-bold text-slate-700">{label}</span>
@@ -154,12 +157,11 @@ export default function GrowthCalculator() {
   const [res, setRes] = useState(null);
   const [err, setErr] = useState("");
 
-  const fail = (m) => {
+  const fail = (message) => {
     setRes(null);
-    setErr(m);
+    setErr(message);
   };
 
-  // پاک کردن تمام اطلاعات فرم و نتیجه
   const reset = () => {
     setSex("girl");
     setAge("");
@@ -176,16 +178,21 @@ export default function GrowthCalculator() {
     const h = num(cm);
     const w = num(kg);
 
-    if (a == null || a < 0 || a > MAX_WEIGHT_MONTHS)
+    if (a == null || a < 0 || a > MAX_WEIGHT_MONTHS) {
       return fail(`سن را بین ۰ تا ${faNum(MAX_WEIGHT_MONTHS)} ماه وارد کنید.`);
+    }
 
-    if (h == null && w == null) return fail("قد یا وزن کودک را وارد کنید.");
+    if (h == null && w == null) {
+      return fail("قد یا وزن کودک را وارد کنید.");
+    }
 
-    if (h != null && (h < 30 || h > 130))
+    if (h != null && (h < 30 || h > 130)) {
       return fail("قد را بر حسب سانتی‌متر وارد کنید (مثلاً 75.5).");
+    }
 
-    if (w != null && (w < 1 || w > 40))
+    if (w != null && (w < 1 || w > 40)) {
       return fail("وزن را بر حسب کیلوگرم وارد کنید (مثلاً 9.6).");
+    }
 
     setErr("");
 
@@ -216,8 +223,10 @@ export default function GrowthCalculator() {
       id="calculator"
       className="relative scroll-mt-20 overflow-hidden rounded-3xl bg-linear-to-br from-white via-sky-50 to-blue-50 p-4 shadow-sm ring-1 ring-sky-200 md:p-5"
     >
-      {/* عنوان */}
-      <div className="flex items-start gap-3">
+      {/* =========================================
+          عنوان
+      ========================================== */}
+      <div className="relative z-20 flex items-start gap-3">
         <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-blue-100 text-xl text-blue-700">
           <FaChartSimple />
         </span>
@@ -233,9 +242,84 @@ export default function GrowthCalculator() {
         </div>
       </div>
 
-      {/* تصویر + فرم */}
-      <div className="mt-3 flex items-stretch gap-2">
-        <form onSubmit={submit} className="min-w-0 flex-1 space-y-2.5">
+      {/* =========================================
+          موبایل:
+          تصویر به عنوان Background کل فرم
+          
+          دسکتاپ:
+          تصویر سمت چپ + فرم سمت راست
+      ========================================== */}
+      <div
+        className="
+          relative mt-3 overflow-hidden rounded-3xl
+          bg-white
+          md:flex md:items-stretch md:gap-2 md:overflow-visible md:rounded-none md:bg-transparent
+        "
+      >
+        {/* =====================================
+            Background تصویر فقط در موبایل
+        ====================================== */}
+        <div
+          className="
+            absolute inset-0 z-0 bg-center bg-no-repeat
+            bg-contain opacity-30
+            md:hidden
+          "
+          style={{
+            backgroundImage: "url('/images/growth/calc-boy.webp')",
+          }}
+        />
+
+        {/* لایه روشن روی تصویر موبایل */}
+        <div
+          className="
+            absolute inset-0 z-0
+            bg-white/35
+            backdrop-blur-[1px]
+            md:hidden
+          "
+        />
+
+        {/* =====================================
+            تصویر دسکتاپ
+        ====================================== */}
+        <div
+          className="
+            relative z-10 hidden
+            w-[27%] shrink-0
+            sm:w-[30%]
+            md:block
+          "
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/growth/calc-boy.webp"
+            alt=""
+            draggable={false}
+            className="
+              pointer-events-none
+              absolute inset-0
+              h-full w-full
+              object-contain
+              object-left-bottom
+            "
+          />
+        </div>
+
+        {/* =====================================
+            فرم
+        ====================================== */}
+        <form
+          onSubmit={submit}
+          className="
+            relative z-10
+            min-w-0 flex-1
+            space-y-2.5
+            p-2
+            sm:p-3
+            md:p-0
+          "
+        >
           {/* جنسیت */}
           <div className="flex items-center gap-2">
             <span className="shrink-0 text-xs font-bold text-slate-600">
@@ -265,7 +349,7 @@ export default function GrowthCalculator() {
                   className={`flex items-center justify-center gap-1.5 rounded-2xl py-2.5 text-xs font-bold transition active:scale-95 ${
                     sex === k
                       ? "bg-white shadow-md ring-2 ring-blue-500"
-                      : "bg-white/70 text-slate-500 ring-1 ring-sky-100"
+                      : "bg-white/80 text-slate-500 ring-1 ring-sky-100"
                   }`}
                 >
                   <Icon className={sex === k ? on : "text-slate-400"} />
@@ -308,17 +392,29 @@ export default function GrowthCalculator() {
 
           {/* خطا */}
           {err && (
-            <p className="rounded-2xl bg-red-50 p-3 text-xs leading-6 text-red-600">
+            <p className="rounded-2xl bg-red-50/95 p-3 text-xs leading-6 text-red-600 shadow-sm">
               {err}
             </p>
           )}
 
-          {/* دکمه‌ها */}
-          <div className="mx-auto flex w-full max-w-xs gap-2">
+          {/* =====================================
+              دکمه‌ها
+          ====================================== */}
+          <div className="mx-auto flex w-full max-w-xs gap-2 pt-1">
             {/* مشاهده نتیجه */}
             <button
               type="submit"
-              className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-blue-800 py-3 text-sm font-bold text-white shadow-lg shadow-blue-900/20 transition hover:bg-blue-900 active:scale-[0.98]"
+              className="
+                flex flex-1 items-center justify-center gap-2
+                rounded-2xl
+                bg-blue-800
+                py-3
+                text-sm font-bold text-white
+                shadow-lg shadow-blue-900/20
+                transition
+                hover:bg-blue-900
+                active:scale-[0.98]
+              "
             >
               <FaChartSimple />
               مشاهده نتیجه
@@ -328,26 +424,32 @@ export default function GrowthCalculator() {
             <button
               type="button"
               onClick={reset}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-bold text-slate-600 shadow-md ring-1 ring-slate-200 transition hover:bg-slate-50 hover:text-red-600 active:scale-[0.98]"
+              className="
+                flex items-center justify-center gap-2
+                rounded-2xl
+                bg-white
+                px-4 py-3
+                text-sm font-bold text-slate-600
+                shadow-md
+                ring-1 ring-slate-200
+                transition
+                hover:bg-slate-50
+                hover:text-red-600
+                active:scale-[0.98]
+              "
             >
               پاک کردن
             </button>
           </div>
         </form>
-        <div className="relative w-[27%] shrink-0 sm:w-[30%]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/growth/calc-boy.webp"
-            alt=""
-            draggable={false}
-            className="pointer-events-none absolute inset-0 h-full w-full object-contain object-left-bottom"
-          />
-        </div>
       </div>
 
-      {/* نتیجه */}
+      {/* =========================================
+          نتیجه
+      ========================================== */}
       {res && (
-        <div className="mt-4 space-y-3">
+        <div className="relative z-20 mt-4 space-y-3">
+          {/* نتیجه قد */}
           {res.height && (
             <ResultBlock
               title="قد"
@@ -357,6 +459,7 @@ export default function GrowthCalculator() {
             />
           )}
 
+          {/* قد خارج از محدوده */}
           {res.heightSkipped && (
             <p className="rounded-2xl bg-amber-50 p-3 text-xs leading-6 text-amber-900">
               ارزیابی قد در این ابزار فقط تا {faNum(MAX_HEIGHT_MONTHS)} ماهگی
@@ -365,6 +468,7 @@ export default function GrowthCalculator() {
             </p>
           )}
 
+          {/* نتیجه وزن */}
           {res.weight && (
             <ResultBlock
               title="وزن"
@@ -376,8 +480,10 @@ export default function GrowthCalculator() {
         </div>
       )}
 
-      {/* توضیحات */}
-      <p className="mt-3 text-[11px] leading-5 text-blue-900/60">
+      {/* =========================================
+          توضیحات پایین
+      ========================================== */}
+      <p className="relative z-20 mt-3 text-[11px] leading-5 text-blue-900/60">
         براساس استاندارد WHO: قد برای ۰ تا {faNum(MAX_HEIGHT_MONTHS)} ماه (قد
         خوابیده) و وزن برای ۰ تا {faNum(MAX_WEIGHT_MONTHS)} ماه. این ابزار تشخیص
         پزشکی نیست؛ روند رشد کودک را با پزشک بررسی کنید.
