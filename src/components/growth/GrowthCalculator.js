@@ -162,6 +162,7 @@ export default function GrowthCalculator() {
     setErr(message);
   };
 
+  // پاک کردن فرم و نتیجه
   const reset = () => {
     setSex("girl");
     setAge("");
@@ -243,26 +244,27 @@ export default function GrowthCalculator() {
       </div>
 
       {/* =========================================
-          موبایل:
-          تصویر به عنوان Background کل فرم
-          
-          دسکتاپ:
-          تصویر سمت چپ + فرم سمت راست
+          تصویر + فرم
       ========================================== */}
       <div
         className="
           relative mt-3 overflow-hidden rounded-3xl
           bg-white
-          md:flex md:items-stretch md:gap-2 md:overflow-visible md:rounded-none md:bg-transparent
+          md:flex md:items-stretch md:gap-2
+          md:overflow-visible
+          md:rounded-none
+          md:bg-transparent
         "
       >
         {/* =====================================
-            Background تصویر فقط در موبایل
+            تصویر پس‌زمینه موبایل
         ====================================== */}
         <div
           className="
-            absolute inset-0 z-0 bg-center bg-no-repeat
-            bg-contain opacity-30
+            absolute inset-0 z-0
+            bg-center bg-no-repeat
+            bg-contain
+            opacity-55
             md:hidden
           "
           style={{
@@ -270,12 +272,13 @@ export default function GrowthCalculator() {
           }}
         />
 
-        {/* لایه روشن روی تصویر موبایل */}
+        {/* =====================================
+            لایه سفید بسیار ملایم روی تصویر
+        ====================================== */}
         <div
           className="
             absolute inset-0 z-0
-            bg-white/35
-            backdrop-blur-[1px]
+            bg-white/15
             md:hidden
           "
         />
@@ -349,7 +352,7 @@ export default function GrowthCalculator() {
                   className={`flex items-center justify-center gap-1.5 rounded-2xl py-2.5 text-xs font-bold transition active:scale-95 ${
                     sex === k
                       ? "bg-white shadow-md ring-2 ring-blue-500"
-                      : "bg-white/80 text-slate-500 ring-1 ring-sky-100"
+                      : "bg-white/85 text-slate-500 ring-1 ring-sky-100"
                   }`}
                 >
                   <Icon className={sex === k ? on : "text-slate-400"} />
@@ -481,7 +484,7 @@ export default function GrowthCalculator() {
       )}
 
       {/* =========================================
-          توضیحات پایین
+          توضیحات
       ========================================== */}
       <p className="relative z-20 mt-3 text-[11px] leading-5 text-blue-900/60">
         براساس استاندارد WHO: قد برای ۰ تا {faNum(MAX_HEIGHT_MONTHS)} ماه (قد
