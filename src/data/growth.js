@@ -32,12 +32,12 @@ export const heroSlides = [
   },
   {
     id: "calc",
-    pill: "محاسبه‌گر رشد",
+    pill: "محاسبه‌و بررسی رشد کودک",
     title: "قد کودک شما",
     text: "قد را با استاندارد جهانی WHO مقایسه کنید",
     cta: "محاسبه کنید",
     href: "#calculator",
-    image: `${IMG}/giraffe.webp`,
+    image: `${IMG}/calc-boy.webp`,
     fit: "giraffe",
   },
   {
